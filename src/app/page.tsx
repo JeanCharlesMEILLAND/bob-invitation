@@ -30,6 +30,14 @@ export default function Home() {
     })
   }, [])
 
+  const handleButtonClick = async (url: string) => {
+    console.log("Performing action before opening link");
+    // if (referrer){
+    //
+    // }
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   if (isLoading) {
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
@@ -54,22 +62,18 @@ export default function Home() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4">
-          <a
-              href={androidUrl || ""}
-              className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition transform hover:scale-105"
-              target="_blank"
-              rel="noopener noreferrer"
+          <button
+              onClick={() => handleButtonClick(androidUrl || "")}
+              className=" cursor-pointer bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition transform hover:scale-105"
           >
             Télécharger l&apos;APK Android
-          </a>
-          <a
-              href={process.env.NEXT_PUBLIC_TEST_FLIGTH}
-              className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition transform hover:scale-105"
-              target="_blank"
-              rel="noopener noreferrer"
+          </button>
+          <button
+              onClick={() => handleButtonClick(process.env.NEXT_PUBLIC_TEST_FLIGTH || "")}
+              className=" cursor-pointer bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition transform hover:scale-105"
           >
             Rejoindre TestFlight iOS
-          </a>
+          </button>
         </div>
       </main>
   )

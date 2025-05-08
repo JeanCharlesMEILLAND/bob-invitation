@@ -28,3 +28,5 @@ export async function fetchAndroidLink(): Promise<string | null> {
     return null;
   }
 }
+
+
