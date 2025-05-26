@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { fetchAndroidLink } from "@/utils/link.utils";
+import { ClipboardIcon } from '@heroicons/react/24/outline'
 
 export default function Home() {
   const [referrer, setReferrer] = useState<string | null>(null)
@@ -31,10 +32,6 @@ export default function Home() {
   }, [])
 
   const handleButtonClick = async (url: string) => {
-    console.log("Performing action before opening link");
-    // if (referrer){
-    //
-    // }
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
@@ -57,7 +54,21 @@ export default function Home() {
         <h1 className="text-4xl font-bold mb-4 text-blue-400">Bienvenue sur Bob 👋</h1>
         <p className="text-lg mb-6">
           {referrer
-              ? `Vous avez été invité par ${referrer}`
+              ? (
+                  <>
+                    Votre code d&#39;invitation est :
+                    <span className="font-bold"> {referrer}</span>
+                    <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(referrer);
+                        }}
+                        className="ml-2 text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
+                        title="Copier le code"
+                    >
+                      <ClipboardIcon className="h-5 w-5 inline" />
+                    </button>
+                  </>
+              )
               : 'Découvrez notre application dès maintenant !'}
         </p>
 
