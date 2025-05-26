@@ -20,6 +20,7 @@ export default function Home() {
       fetchAndroidLink(),
       new Promise(resolve => setTimeout(resolve, 2000)) // 2 second delay
     ]).then(([url]) => {
+      console.log("====>" , url)
       if (url) {
         setAndroidUrl(url)
       }
@@ -31,9 +32,10 @@ export default function Home() {
     })
   }, [])
 
-  const handleButtonClick = async (url: string) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
+  // const handleButtonClick = async (url: string) => {
+  //   console.log(url)
+  //   window.open(url, '_blank', 'noopener,noreferrer');
+  // };
 
   if (isLoading) {
     return (
@@ -73,18 +75,22 @@ export default function Home() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4">
-          <button
-              onClick={() => handleButtonClick(androidUrl || "")}
-              className=" cursor-pointer bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition transform hover:scale-105"
+          <a
+              href={androidUrl || ""}
+              className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition transform hover:scale-105"
+              target="_blank"
+              rel="noopener noreferrer"
           >
             Télécharger l&apos;APK Android
-          </button>
-          <button
-              onClick={() => handleButtonClick(process.env.NEXT_PUBLIC_TEST_FLIGTH || "")}
-              className=" cursor-pointer bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition transform hover:scale-105"
+          </a>
+          <a
+              href={process.env.NEXT_PUBLIC_TEST_FLIGTH}
+              className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition transform hover:scale-105"
+              target="_blank"
+              rel="noopener noreferrer"
           >
             Rejoindre TestFlight iOS
-          </button>
+          </a>
         </div>
       </main>
   )
