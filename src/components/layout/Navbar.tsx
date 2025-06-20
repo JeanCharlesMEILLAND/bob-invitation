@@ -35,14 +35,14 @@ const NavLink: FC<{
         target={newTab ? "_blank" : undefined}
         rel={newTab ? "noopener noreferrer" : undefined}
         className={cn(
-            `hover:opacity-50 text-base ${isActive ? "font-bold" : "font-normal"} transition-colors duration-300 text-black`
+            `hover:opacity-50 text-base ${isActive ? "font-bold" : "font-normal"} transition-colors duration-300 text-white`
         )}
         onClick={onClick}
         scroll={true}
         prefetch={true}
     >
       {children}
-      {isActive && <div className="w-full h-[2px] bg-orange-500"/>}
+      {isActive && <div className="w-full h-[2px] bg-white"/>}
     </Link>
 );
 
@@ -128,11 +128,11 @@ const Navbar: FC<NavbarData> = ({data}) => {
   return (
       <nav
           className={cn(
-              "sticky w-full h-24 md:h-24 flex items-center transition-colors duration-300 bg-white z-[99999]",
+              "sticky w-full h-24 md:h-24 flex items-center transition-colors duration-300 z-[99999]",
               scrolled ? "top-0" : "top-6"
           )}
       >
-        <div className="container w-full h-full flex items-center justify-between ">
+        <div className="container mx-auto w-full h-full flex items-center justify-between ">
           <Link href="/" className="py-4 h-full flex items-center">
             <div className="relative w-[100px] h-full transition-all duration-300 ease-in-out">
               <Image
@@ -146,15 +146,15 @@ const Navbar: FC<NavbarData> = ({data}) => {
             </div>
           </Link>
 
-          <div className="w-full flex items-center justify-center gap-6">
+          <div className="w-full flex items-center justify-end gap-6">
             <ul className={cn("hidden lg:flex items-center gap-8 h-full")}>
               {renderNavItems(menus, "left")}
             </ul>
           </div>
 
-          <div className={"lg:flex w-fit hidden"}>
-            {button &&
-                button.map((btn) => (
+          {button && (
+              <div className={"lg:flex w-fit hidden"}>
+                {button.map((btn) => (
                     <StrapiButtonLink
                         key={btn.url}
                         {...btn}
@@ -162,7 +162,9 @@ const Navbar: FC<NavbarData> = ({data}) => {
                         className="h-12 rounded-none"
                     />
                 ))}
-          </div>
+              </div>
+          )}
+
 
           <button
               onClick={() => {
@@ -199,7 +201,7 @@ const Navbar: FC<NavbarData> = ({data}) => {
             className={cn(
                 "fixed inset-y-0 right-0 z-[9999] bg-white backdrop-blur-3xl lg:hidden",
                 "transition-all duration-300 ease-in-out",
-                "w-64", // Set a fixed width for the sidebar
+                "w-64",
                 localIsMenuOpen ? "translate-x-0" : "translate-x-full"
             )}
         >
@@ -221,7 +223,6 @@ const Navbar: FC<NavbarData> = ({data}) => {
                         <StrapiButtonLink
                             key={btn.url}
                             {...btn}
-                            // showArrow={true}
                             responsive={true}
                             className="mb-2 w-fit text-xs "
                         />
