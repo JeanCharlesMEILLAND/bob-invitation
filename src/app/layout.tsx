@@ -1,27 +1,44 @@
-import {Geist, Geist_Mono} from "next/font/google";
+import { Inter, Outfit, Prompt } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
-import {getFooter, getNavbar} from "@/utils/get-global-data";
+import { getFooter, getNavbar } from "@/utils/get-global-data";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  weight: ["300", "400", "700", "800", "900"],
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+
+const outfit = Outfit({
+  weight: ["300", "400", "700", "800", "900"],
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-outfit",
+});
+
+
+const prompt = Prompt({
+  weight: ["400", "700", "800", "900"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-prompt",
 });
 
 export const metadata = {
-  title: 'Invitation à Bob',
-  description: 'Rejoignez Bob grâce à une invitation exclusive.',
-}
+  title: "Invitation à Bob",
+  description: "Rejoignez Bob grâce à une invitation exclusive.",
+  icons: [{ 
+    rel: "icon", 
+    url:  "/svg/bob.svg"
+  }],
+};
 
 export default async function RootLayout({
-                                           children,
-                                         }: Readonly<{
+  children,
+}: Readonly<{
   children: React.ReactNode;
 }>) {
   const [navbarData, footerData] = await Promise.all([
@@ -29,14 +46,18 @@ export default async function RootLayout({
     getFooter(),
   ]);
   return (
-      <html lang="fr">
+
+
+    <html lang="fr">
       <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={` ${inter.variable} ${outfit.variable} ${prompt.variable} antialiased bg-[var(--background)] text-[var(--foreground)]`}
       >
-      <Navbar data={navbarData.data}/>
-      {children}
-      <Footer data={footerData.data}/>
+        <Navbar data={navbarData.data} />
+        <main className="min-h-screen">
+          {children}
+        </main>
+        <Footer data={footerData.data} />
       </body>
-      </html>
+    </html>
   );
 }

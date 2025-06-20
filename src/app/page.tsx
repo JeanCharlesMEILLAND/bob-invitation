@@ -18,7 +18,7 @@ export default async function RootRoute() {
 
     const contentSections = page.data[0].contentSections;
 
-    console.log(contentSections)
+    // console.log(contentSections)
 
     return (
         <>
