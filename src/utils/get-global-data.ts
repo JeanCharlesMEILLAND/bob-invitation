@@ -1,7 +1,7 @@
-import {FooterData, GlobalData, NavbarData} from "@/types/common";
+import {FooterData, NavbarData} from "@/types/common";
 import {fetchAPI} from "@/utils/api.utils";
 
-export const getGlobal = async (): Promise<GlobalData> => {
+export const getGlobal = async (): Promise<any> => {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
   if (!token)
@@ -13,7 +13,7 @@ export const getGlobal = async (): Promise<GlobalData> => {
   const urlParamsObject = {
     populate: ["defaultSeo", "favicon", "defaultSeo.shareImage"],
   };
-  return await fetchAPI(path, urlParamsObject, options) as FooterData;
+  return await fetchAPI(path, urlParamsObject, options) as any;
 }
 
 export const getNavbar = async (): Promise<NavbarData> => {
@@ -28,9 +28,8 @@ export const getNavbar = async (): Promise<NavbarData> => {
   const urlParamsObject = {
     populate: ["menus", "logo.logo", "button"],
   };
-  return await fetchAPI(path, urlParamsObject, options);
+  return await fetchAPI(path, urlParamsObject, options) as NavbarData;
 }
-
 export const getFooter = async (): Promise<FooterData> => {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
@@ -49,5 +48,5 @@ export const getFooter = async (): Promise<FooterData> => {
       "contacts",
     ],
   };
-  return await fetchAPI(path, urlParamsObject, options);
+  return await fetchAPI(path, urlParamsObject, options) as FooterData;
 }

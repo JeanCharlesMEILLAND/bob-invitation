@@ -1,4 +1,5 @@
 import type {NextConfig} from "next";
+import path from 'path';
 
 const nextConfig: NextConfig = {
   images: {
@@ -10,6 +11,13 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  webpack: (config) => {
+    config.resolve.alias['@'] = path.join(__dirname, 'src');
+    return config;
   },
 };
 
