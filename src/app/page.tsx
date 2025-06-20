@@ -1,97 +1,36 @@
-'use client'
+import {getPageBySlug} from "@/utils/page-resolver.util";
+import componentResolver from "@/utils/component-resolver.util";
+import ErrorAlert from "@/components/common/alerts/ErrorAlert";
 
-import { useEffect, useState } from 'react'
-import { fetchAndroidLink } from "@/utils/link.utils";
-import { ClipboardIcon } from '@heroicons/react/24/outline'
+export const revalidate = 5;
 
-export default function Home() {
-  const [referrer, setReferrer] = useState<string | null>(null)
-  const [androidUrl, setAndroidUrl] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+export default async function RootRoute() {
+  let error = null;
+  try {
+    const page = await getPageBySlug("accueil");
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    const ref = params.get('invitor')
-    setReferrer(ref)
+    if (page.error && page.error.status == 401)
+      throw new Error(
+          "Missing or invalid credentials. Have you created an access token using the Strapi admin panel? http://localhost:1337/admin/"
+      );
 
-    const startTime = Date.now();
+    if (page.data.length === 0) return null;
+    const contentSections = page.data[0].contentSections;
 
-    Promise.all([
-      fetchAndroidLink(),
-      new Promise(resolve => setTimeout(resolve, 2000)) // 2 second delay
-    ]).then(([url]) => {
-      console.log("====>" , url)
-      if (url) {
-        setAndroidUrl(url)
-      }
-      const elapsedTime = Date.now() - startTime;
-      const remainingTime = Math.max(2000 - elapsedTime, 0);
-      setTimeout(() => {
-        setIsLoading(false)
-      }, remainingTime);
-    })
-  }, [])
-
-  // const handleButtonClick = async (url: string) => {
-  //   console.log(url)
-  //   window.open(url, '_blank', 'noopener,noreferrer');
-  // };
-
-  if (isLoading) {
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-          <div className="animate-fade-in text-center">
-            <h1 className="text-5xl font-bold mb-8 text-blue-400">Bob</h1>
-            <div className="flex justify-center items-center mb-8">
-              <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
-            </div>
-            <p className="text-lg">Chargement en cours...</p>
-          </div>
-        </div>
-    )
+        <>
+          {contentSections.map((section: any, index: number) =>
+              componentResolver(section, index)
+          )}
+        </>
+    );
+  } catch (e: any) {
+    error = "Missing or invalid credentials";
   }
 
-  return (
-      <main className="flex flex-col items-center justify-center min-h-screen bg-gray-900 p-4 text-center text-white animate-fade-in">
-        <h1 className="text-4xl font-bold mb-4 text-blue-400">Bienvenue sur Bob 👋</h1>
-        <p className="text-lg mb-6">
-          {referrer
-              ? (
-                  <>
-                    Votre code d&#39;invitation est :
-                    <span className="font-bold"> {referrer}</span>
-                    <button
-                        onClick={() => {
-                          navigator.clipboard.writeText(referrer);
-                        }}
-                        className="ml-2 text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
-                        title="Copier le code"
-                    >
-                      <ClipboardIcon className="h-5 w-5 inline" />
-                    </button>
-                  </>
-              )
-              : 'Découvrez notre application dès maintenant !'}
-        </p>
+  if (error) {
+    return <ErrorAlert message={error}/>;
+  }
 
-        <div className="flex flex-col sm:flex-row gap-4">
-          <a
-              href={androidUrl || ""}
-              className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition transform hover:scale-105"
-              target="_blank"
-              rel="noopener noreferrer"
-          >
-            Télécharger l&apos;APK Android
-          </a>
-          <a
-              href={process.env.NEXT_PUBLIC_TEST_FLIGTH}
-              className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition transform hover:scale-105"
-              target="_blank"
-              rel="noopener noreferrer"
-          >
-            Rejoindre TestFlight iOS
-          </a>
-        </div>
-      </main>
-  )
+  return null;
 }
