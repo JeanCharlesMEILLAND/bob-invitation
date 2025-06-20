@@ -1,13 +1,13 @@
-import {getPageBySlug} from "@/utils/page-resolver.util";
 import componentResolver from "@/utils/component-resolver.util";
 import ErrorAlert from "@/components/common/alerts/ErrorAlert";
+import {getPageBySlug} from "@/utils/page-resolver.util";
 
 export const revalidate = 5;
 
 export default async function RootRoute() {
   let error = null;
   try {
-    const page = await getPageBySlug("accueil");
+    const page: any = await getPageBySlug("accueil");
 
     if (page.error && page.error.status == 401)
       throw new Error(
@@ -15,7 +15,10 @@ export default async function RootRoute() {
       );
 
     if (page.data.length === 0) return null;
+
     const contentSections = page.data[0].contentSections;
+
+    console.log(contentSections)
 
     return (
         <>

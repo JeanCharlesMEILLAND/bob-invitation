@@ -13,7 +13,7 @@ export const getGlobal = async (): Promise<GlobalData> => {
   const urlParamsObject = {
     populate: ["defaultSeo", "favicon", "defaultSeo.shareImage"],
   };
-  return await fetchAPI(path, urlParamsObject, options);
+  return await fetchAPI(path, urlParamsObject, options) as FooterData;
 }
 
 export const getNavbar = async (): Promise<NavbarData> => {
@@ -26,7 +26,7 @@ export const getNavbar = async (): Promise<NavbarData> => {
   const options = {headers: {Authorization: `Bearer ${token}`}};
 
   const urlParamsObject = {
-    populate: ["menus", "logo.logo", "button", "prestations", "prestations.blackIcon", "prestations.whiteIcon"],
+    populate: ["menus", "logo.logo", "button"],
   };
   return await fetchAPI(path, urlParamsObject, options);
 }
@@ -47,12 +47,6 @@ export const getFooter = async (): Promise<FooterData> => {
       "socialLinks",
       "legalLinks",
       "contacts",
-      "sections",
-      "sections.picture",
-      "sections.picture.picture",
-      "sections.styles",
-      "sections.button",
-      "sections.styles.bgImage"
     ],
   };
   return await fetchAPI(path, urlParamsObject, options);

@@ -2,7 +2,8 @@ import {StrapiButton} from "@/types/common";
 import Link from "next/link";
 import React, {FC} from "react";
 import {AiOutlineArrowRight} from "react-icons/ai";
-import {cn} from "@/utils/cn";
+import {cn} from "@/utils/css.utils";
+
 
 interface StrapiButtonLinkProps extends StrapiButton {
   className?: string;

@@ -2,9 +2,6 @@
 import React, {FC, useState} from "react";
 import Link from "next/link";
 import {FooterData} from "@/types/common";
-
-import {FaEnvelope, FaPhone} from "react-icons/fa";
-import {FaLocationDot} from "react-icons/fa6";
 import StrapiPicture from "@/components/common/StrapiPicture";
 import {renderSocialIcon} from "@/utils/icon.utils";
 import {cn} from "@/utils/css.utils";
@@ -16,7 +13,7 @@ const ContactSection: FC<{
   className?: string;
   onLogoHover: (isHovered: boolean) => void;
 }> = ({logo, contacts, socialLinks, className, onLogoHover}) => {
-  const {id, ...contactsWithoutId} = contacts;
+  // const {id, ...contactsWithoutId} = contacts;
 
   const [logoShow, setLogoShow] = useState(false);
 
@@ -54,12 +51,6 @@ const Footer: FC<FooterData> = ({data}) => {
   const {logo, contacts, socialLinks, legalLinks, menus} = data;
   const [isHovered, setIsHovered] = useState(false);
 
-  const {id, ...contactsWithoutId} = contacts as {
-    id?: string;
-    adresse: string;
-    phone: string;
-    email: string;
-  };
 
   return (
       <div className="relative">
@@ -75,40 +66,7 @@ const Footer: FC<FooterData> = ({data}) => {
               />
 
               <div className="h-fit flex-1 flex-col justify-end items-end gap-12">
-                <div className="flex flex-1 flex-row gap-6">
-                  <div className="w-full flex flex-col sm:flex-row justify-between items-start gap-4">
-                    {Object.entries(contactsWithoutId).map(([key, value]) => (
-                        <div key={key} className="w-full flex flex-1 items-center gap-2">
-                          {key === "adresse" ? (
-                              <div className="w-full flex flex-col justify-center items-center">
-                                <div className="w-full h-24 flex justify-center items-center">
-                                  <FaLocationDot size={32}/>
-                                </div>
-                                <p className="font-bold text-lg">Retrouvez-nous</p>
-                                <span className="text-center mt-4">{value}</span>
-                              </div>
-                          ) : (
-                              <div className="w-full flex flex-col justify-center items-center">
-                                <div className="w-full h-24 flex justify-center items-center">
-                                  {key === "email" ?
-                                      <FaEnvelope size={32}/>
-                                      :
-                                      <FaPhone size={32}/>
-                                  }
-                                </div>
-                                <p className="font-bold text-lg">{key === "email" ? "Contactez-nous" : "Appelez-nous"}</p>
-                                <Link
-                                    href={`${key === "email" ? "mailto:" : "tel:"}${value}`}
-                                    className="text-center mt-4"
-                                >
-                                  {value}
-                                </Link>
-                              </div>
-                          )}
-                        </div>
-                    ))}
-                  </div>
-                </div>
+               
                 <div className="w-full h-[1.5px] bg-white/50 mt-8"/>
                 <div className="w-full flex flex-row gap-4 items-center justify-center py-4 mt-2">
                   {menus.map(item => (

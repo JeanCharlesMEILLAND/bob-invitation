@@ -7,9 +7,9 @@ export const getStrapiBaseURL = () => {
 };
 
 export const getStrapiURL = (paths: string) => {
-  const apiURL = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+  const apiURL = process.env.NEXT_PUBLIC_STRAPI_URL;
   if (!apiURL) {
-    console.error("NEXT_PUBLIC_STRAPI_API_URL is not defined");
+    console.error("NEXT_PUBLIC_STRAPI_URL is not defined");
   }
   return `${apiURL || ""}${paths}`;
 };

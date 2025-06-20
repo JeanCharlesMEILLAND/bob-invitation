@@ -28,6 +28,8 @@ export async function fetchAPI(
         `/api${path}${queryString ? `?${queryString}` : ""}`
     )}`;
 
+    console.log(requestUrl)
+
     const response = await axios.get(requestUrl, mergedOptions);
     return response.data;
   } catch (error: any) {

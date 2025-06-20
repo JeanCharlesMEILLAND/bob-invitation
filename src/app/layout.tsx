@@ -1,7 +1,8 @@
 import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
-import {Navbar} from "@/components/layout/Navbar";
-import {Footer} from "@/components/layout/Footer";
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
+import {getFooter, getNavbar} from "@/utils/get-global-data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,19 +19,23 @@ export const metadata = {
   description: 'Rejoignez Bob grâce à une invitation exclusive.',
 }
 
-export default function RootLayout({
-                                     children,
-                                   }: Readonly<{
+export default async function RootLayout({
+                                           children,
+                                         }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [navbarData, footerData] = await Promise.all([
+    getNavbar(),
+    getFooter(),
+  ]);
   return (
       <html lang="fr">
       <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <Navbar/>
+      <Navbar data={navbarData.data}/>
       {children}
-      <Footer/>
+      <Footer data={footerData.data}/>
       </body>
       </html>
   );
