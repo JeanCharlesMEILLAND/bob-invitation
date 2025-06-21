@@ -25,22 +25,22 @@ export function HeroContent({
 
   return (
     <motion.div 
-      className="flex flex-col gap-8"
+      className="flex flex-col items-center lg:items-start gap-8"
       variants={heroContentcontentVariants}
       initial="hidden"
       animate="visible"
     >
       {/* Titre */}
       <motion.div variants={heroContenttitleVariants}>
-        <HighlightedText text={title} style={titleStyle} />
+        <HighlightedText text={title} style={titleStyle} className={textMediaQueries + " text-4xl md:text-5xl lg:text-[74px] lg:[line-height:112px]"}/>
       </motion.div>
 
       <motion.div variants={heroContentitemVariants}>
-        <HighlightedText text={subtitle} style={subtitleStyle} />
+        <HighlightedText text={subtitle} style={subtitleStyle} className={textMediaQueries + " text-2xl md:text-3xl lg:text-[36px]"}/>
       </motion.div>
 
       <motion.div variants={heroContentitemVariants}>
-        <HighlightedText text={description} style={descriptionStyle} />
+        <HighlightedText text={description} style={descriptionStyle} className={textMediaQueries}/>
       </motion.div>
 
       <motion.div variants={heroContentctaVariants}>
@@ -56,6 +56,7 @@ export function HeroContent({
             iconAlt: "Download on Apple Store",
             onClick: onIOSDownload
           }}
+          textMediaQueries={textMediaQueries}
         />
       </motion.div>
     </motion.div>
@@ -66,15 +67,12 @@ const titleStyle: React.CSSProperties = {
   fontFamily: 'Prompt',
   fontStyle: "normal",
   fontWeight: 900,
-  fontSize: "74px",
-  lineHeight: "112px",
 };
 
 const subtitleStyle: React.CSSProperties = {
   fontFamily: 'Inter',
   fontStyle: "normal",
   fontWeight: 400,
-  fontSize: "36px",
   lineHeight: "130%",
   letterSpacing: "-0.06em",
 };
@@ -88,3 +86,4 @@ const descriptionStyle: React.CSSProperties = {
 };
 
 
+export const textMediaQueries = "text-center lg:text-start";

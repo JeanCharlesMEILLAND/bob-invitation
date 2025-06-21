@@ -1,27 +1,24 @@
 import { Inter, Outfit, Prompt } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
 import { getFooter, getNavbar } from "@/utils/get-global-data";
+import ClientLayout from "./ClientLayout";
 
 const inter = Inter({
-  weight: ["300", "400", "700", "800", "900"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
 });
 
-
 const outfit = Outfit({
-  weight: ["300", "400", "700", "800", "900"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-outfit",
 });
 
-
 const prompt = Prompt({
-  weight: ["400", "700", "800", "900"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-prompt",
@@ -30,9 +27,9 @@ const prompt = Prompt({
 export const metadata = {
   title: "Invitation à Bob",
   description: "Rejoignez Bob grâce à une invitation exclusive.",
-  icons: [{ 
-    rel: "icon", 
-    url:  "/svg/bob.svg"
+  icons: [{
+    rel: "icon",
+    url: "/svg/bob.svg"
   }],
 };
 
@@ -45,18 +42,16 @@ export default async function RootLayout({
     getNavbar(),
     getFooter(),
   ]);
+
+
   return (
-
-
     <html lang="fr">
       <body
-        className={` ${inter.variable} ${outfit.variable} ${prompt.variable} antialiased bg-[var(--background)] text-[var(--foreground)]`}
+        className={`${inter.variable} ${outfit.variable} ${prompt.variable} antialiased`}
       >
-        <Navbar data={navbarData.data} />
-        <main className="min-h-screen">
+        <ClientLayout navbarData={navbarData.data} footerData={footerData.data}>
           {children}
-        </main>
-        <Footer data={footerData.data} />
+        </ClientLayout>
       </body>
     </html>
   );

@@ -13,6 +13,9 @@ import { getStrapiMedia } from "@/utils/url.utils";
 import SVGLightMode from "@/assets/svg/SVGLightMode";
 import SVGDarkMode from "@/assets/svg/SVGDarkMode";
 import ThemeSwitcher from "../common/ThemeSwitcher";
+import SVGLogoBob from "@/assets/svg/SVGLogoBob";
+import BorrowText from "../ui/BorrowText";
+import { useTheme } from "@/context/themeContext";
 
 interface NavItem {
   url: string;
@@ -55,9 +58,11 @@ const Navbar: FC<NavbarData> = ({ data }) => {
   const [localIsMenuOpen, setLocalIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const useImage = useState(true);
 
   const [scrolled, setScrolled] = useState(false);
   const [mobileHeight, setMobileHeight] = useState("100vh");
+  const {theme} = useTheme();
 
   const handleScroll = useCallback(() => {
     const isScrolled = window.scrollY > 0;
@@ -137,16 +142,23 @@ const Navbar: FC<NavbarData> = ({ data }) => {
     >
       <div className="container mx-auto w-full h-full flex items-center justify-between px-8">
         <Link href="/" className="py-4 h-full flex items-center -translate-y-1.5">
-          <div className="relative w-[100px] h-full transition-all duration-300 ease-in-out">
-            <Image
-              src={logoUrl}
-              alt="Logo"
-              width={200}
-              height={200}
-              className="object-contain w-full h-full"
-              priority
-            />
-          </div>
+          {
+            useImage ? (
+              <div className="relative w-[100px] h-fit flex flex-col justify-center items-center transition-all duration-300 ease-in-out">
+                <Image
+                  src={logoUrl}
+                  alt="Logo"
+                  width={200}
+                  height={150}
+                  className="object-contain w-full h-full"
+                  priority
+                />
+                <BorrowText className="-translate-y-1.5 text-center"/>
+              </div>
+            ) : (
+              <SVGLogoBob />
+            )
+          }
         </Link>
 
         <div className="w-auto flex items-center justify-end gap-6">
@@ -178,7 +190,7 @@ const Navbar: FC<NavbarData> = ({ data }) => {
 
         <div className="inline-flex lg:hidden items-center  gap-6">
           {/* Thème switcher */}
-            <ThemeSwitcher />
+          <ThemeSwitcher />
 
           <button
             onClick={() => {
@@ -191,7 +203,7 @@ const Navbar: FC<NavbarData> = ({ data }) => {
             {localIsMenuOpen ? (
               <RiCloseLargeLine
                 size={27}
-                className={"text-black z-[999]"}
+                className={"currentColor z-[999]"}
                 aria-hidden="true"
               />
             ) : (
@@ -199,10 +211,10 @@ const Navbar: FC<NavbarData> = ({ data }) => {
                 size={27}
                 className={
                   scrolled
-                    ? "text-black"
+                    ? "currentColor"
                     : pathname === "/"
-                      ? "text-black"
-                      : "text-black"
+                      ? "currentColor"
+                      : "currentColor"
                 }
                 aria-hidden="true"
               />
@@ -248,8 +260,6 @@ const Navbar: FC<NavbarData> = ({ data }) => {
         </div>
       </div>
 
-
-
       {/* Overlay */}
       {localIsMenuOpen && (
         <div
@@ -261,4 +271,6 @@ const Navbar: FC<NavbarData> = ({ data }) => {
   );
 };
 
+
 export default Navbar;
+

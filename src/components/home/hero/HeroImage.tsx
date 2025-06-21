@@ -8,7 +8,7 @@ interface HeroImageProps {
 
 export function HeroImage({ src, alt, className = "" }: HeroImageProps) {
   return (
-    <div className={`relative min-h-[80vh]  ${className}`}>
+    <div className={`relative h-[65vh] lg:min-h-[75vh]  ${className}`}>
       <Image
         src={src}
         alt={alt}

@@ -16,12 +16,14 @@ interface HeroCTAProps {
     iconAlt: string;
     onClick?: () => void;
   };
+  textMediaQueries?: string;
 }
 
 export function HeroCTA({
   downloadText = "Téléchargez l'application",
   androidButtonProps,
-  iosButtonProps
+  iosButtonProps,
+  textMediaQueries 
 }: HeroCTAProps) {
 
 
@@ -33,45 +35,27 @@ export function HeroCTA({
       animate="visible"
     >
       <motion.div variants={heroCtatextVariants}>
-        <HighlightedText text={downloadText} style={downloadTextStyle} />
+        <HighlightedText text={downloadText} style={downloadTextStyle} className={textMediaQueries}/>
       </motion.div>
 
       <motion.div
-        className="flex flex-row gap-4"
+        className="flex flex-row justify-center lg:justify-start gap-4"
         variants={heroCtabuttonsContainerVariants}
       >
         {androidButtonProps && (
-          <motion.div
-            variants={heroCtabuttonVariants}
-            whileHover={{
-              scale: 1.05,
-              transition: { duration: 0.2 }
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
             <BobButton
               iconSrc={androidButtonProps.iconSrc}
               iconAlt={androidButtonProps.iconAlt}
               onClick={androidButtonProps.onClick}
             />
-          </motion.div>
         )}
 
         {iosButtonProps && (
-          <motion.div
-            variants={heroCtabuttonVariants}
-            whileHover={{
-              scale: 1.05,
-              transition: { duration: 0.2 }
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
             <BobButton
               iconSrc={iosButtonProps.iconSrc}
               iconAlt={iosButtonProps.iconAlt}
               onClick={iosButtonProps.onClick}
             />
-          </motion.div>
         )}
       </motion.div>
     </motion.div>

@@ -1,91 +1,43 @@
 'use client';
-
 import SVGDarkMode from '@/assets/svg/SVGDarkMode';
 import SVGLightMode from '@/assets/svg/SVGLightMode';
-import { useState, useEffect } from 'react';
+import { useTheme } from '@/context/themeContext';
 
 export default function ThemeSwitcher() {
-  const [theme, setTheme] = useState('system');
-  const [mounted, setMounted] = useState(false);
+  const { theme, toggleTheme, mounted } = useTheme();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (mounted) {
-      const savedTheme = localStorage.getItem('theme') || 'system';
-      setTheme(savedTheme);
-      applyTheme(savedTheme);
-    }
-  }, [mounted]);
-
-  const applyTheme = (newTheme: string) => {
-    const root = document.documentElement;
-    
-    if (newTheme === 'dark') {
-      root.style.setProperty('--background', '#262626');
-      root.style.setProperty('--foreground', '#ededed');
-    } else if (newTheme === 'light') {
-      root.style.setProperty('--background', '#ffffff');
-      root.style.setProperty('--foreground', '#262626');
-    } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (prefersDark) {
-        root.style.setProperty('--background', '#262626');
-        root.style.setProperty('--foreground', '#ededed');
-      } else {
-        root.style.setProperty('--background', '#ffffff');
-        root.style.setProperty('--foreground', '#262626');
-      }
-    }
-  };
-
-  const toggleTheme = (newTheme: string) => {
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    applyTheme(newTheme);
-  };
-
-  const getCurrentTheme = () => {
-    if (theme === 'system') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    return theme;
-  };
-
+  // Afficher un placeholder pendant l'hydratation
   if (!mounted) {
     return (
-      <div className="flex items-center gap-6 text-[var(--foreground)]">
-        <div className="w-6 h-6" />
-        <div className="w-6 h-6" />
+      <div className="flex items-center gap-6">
+        <div className="w-6 h-6 opacity-50" />
+        <div className="w-6 h-6 opacity-50" />
       </div>
     );
   }
 
-  const currentTheme = getCurrentTheme();
-
   return (
     <div className="flex items-center gap-6 text-[var(--foreground)]">
-      <button 
-        onClick={() => toggleTheme('light')}
+      <button
+        onClick={toggleTheme}
         className={`p-1 rounded-full cursor-pointer transition-all duration-200 hover:opacity-70 ${
-          currentTheme === 'light' ? 'opacity-100' : 'opacity-40'
+          theme === 'light' ? 'opacity-100' : 'opacity-40'
         }`}
-        aria-label="Activer le mode clair"
+        aria-label={theme === 'light' ? 'Activer le mode sombre' : 'Activer le mode clair'}
       >
-        <SVGLightMode isActive={currentTheme === "light"} animation='customSpin'/>
+        <SVGLightMode isActive={theme === "light"} animation='customSpin'/>
       </button>
-      <button 
-        onClick={() => toggleTheme('dark')}
+      
+      <button
+        onClick={toggleTheme}
         className={`p-1 rounded-full cursor-pointer transition-all duration-200 hover:opacity-70 ${
-          currentTheme === 'dark' 
-            ? 'bg-[var(--foreground)] opacity-100 shadow-sm' 
+          theme === 'dark'
+            ? 'bg-[var(--foreground)] opacity-100 shadow-sm'
             : 'opacity-40'
         }`}
-        aria-label="Activer le mode sombre"
+        aria-label={theme === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre'}
       >
-        <SVGDarkMode isActive={currentTheme === 'dark'} />
+        <SVGDarkMode isActive={theme === 'dark'} />
       </button>
     </div>
   );

@@ -2,6 +2,7 @@ export function HeroBackground({color="#166AF6"}: {color?:string}) {
     return (
       <>
         <div
+        className="animate-pulse"
           style={{
             position: "absolute",
             width: "650px",
@@ -12,7 +13,7 @@ export function HeroBackground({color="#166AF6"}: {color?:string}) {
             mixBlendMode: "lighten",
             opacity: 0.4,
             filter: "blur(250px)",
-            zIndex: -10
+            zIndex: -20
           }}
         />
       </>

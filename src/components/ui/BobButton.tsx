@@ -1,4 +1,7 @@
+"use client";
 import Image from "next/image";
+import { heroCtabuttonVariants } from "../home/hero/hero-variant";
+import { motion } from "framer-motion";
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary';
@@ -44,29 +47,38 @@ export function BobButton({
 
   const finalStyles = {
     ...baseStyles,
-    ...sizeStyles[size]
+    // ...sizeStyles[size]
   };
 
   return (
-    <button
-      className={`px-3 py-2 flex flex-row justify-center items-center shadow-sm ${className} hover:brightness-90 transition`}
-      style={finalStyles}
-      onClick={onClick}
-      disabled={disabled}
-      {...props}
+    <motion.div
+      variants={heroCtabuttonVariants}
+      whileHover={{
+        scale: 1.02,
+        transition: { duration: 0.1 }
+      }}
+      whileTap={{ scale: 0.98 }}
     >
-      {iconSrc ? (
-        <Image
-          src={iconSrc}
-          alt={iconAlt}
-          width={iconWidth}
-          height={iconHeight}
-          className="object-contain"
-          priority
-        />
-      ) : (
-        children
-      )}
-    </button>
+      <button
+        className={`px-3 py-2 min-w-36 md:min-w-40 lg:min-w-44 h-12 md:h-14 flex flex-row justify-center items-center shadow-sm ${className} hover:brightness-90 transition`}
+        style={finalStyles}
+        onClick={onClick}
+        disabled={disabled}
+        {...props}
+      >
+        {iconSrc ? (
+          <Image
+            src={iconSrc}
+            alt={iconAlt}
+            width={iconWidth}
+            height={iconHeight}
+            className={`object-contain w-28 md:w-36 lg:w-44 h-10 `}
+            priority
+          />
+        ) : (
+          children
+        )}
+      </button>
+    </motion.div>
   );
 }

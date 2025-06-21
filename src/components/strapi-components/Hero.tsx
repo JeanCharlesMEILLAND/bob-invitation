@@ -36,7 +36,7 @@ const Hero = () => {
 
   return (
     <motion.div 
-      className="relative container mx-auto px-8 min-h-screen flex justify-start items-center text-[var(--foreground)]"
+      className="relative container mx-auto mt-20 lg:mt-0 px-8 min-h-screen flex justify-start items-center text-[var(--foreground)]"
       variants={herocontainerVariants}
       initial="hidden"
       animate="visible"
@@ -52,7 +52,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.div 
-          className="absolute top-1/2 lg:top-0 -left-20 lg:left-1/2  lg:-translate-x-1/3 -translate-y-full lg:-translate-y-0  -z-10"
+          className="absolute top-1/2 lg:top-0 -left-20 lg:left-1/2  lg:-translate-x-1/3 -translate-y-full lg:-translate-y-0 flex justify-center -z-10"
           variants={herosvgVariants}
         >
           <SVGBob />
