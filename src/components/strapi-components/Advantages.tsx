@@ -33,7 +33,7 @@ export default function Advantages() {
 
     const QRText = " <h2>Scannez</h2>"
     return (
-        <div className="relative container mx-auto px-8 flex flex-col gap-8 md:gap-16 text-[var(--foreground)]">
+        <div className="relative container mx-auto px-8 flex flex-col gap-8 md:gap-16 text-[var(--foreground)]" data-section="advantages">
 
             <HighlightedText text={title} style={titleStyle} />
 

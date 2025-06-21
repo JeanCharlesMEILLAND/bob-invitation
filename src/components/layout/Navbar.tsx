@@ -3,19 +3,17 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { NavbarData } from "@/types/common";
 import { cn } from "@/utils/css.utils";
 import StrapiButtonLink from "@/components/common/buttons/StrapiButtonLink";
 import { getStrapiMedia } from "@/utils/url.utils";
-import SVGLightMode from "@/assets/svg/SVGLightMode";
-import SVGDarkMode from "@/assets/svg/SVGDarkMode";
 import ThemeSwitcher from "../common/ThemeSwitcher";
 import SVGLogoBob from "@/assets/svg/SVGLogoBob";
 import BorrowText from "../ui/BorrowText";
-import { useTheme } from "@/context/themeContext";
+import { scrollToSection } from "@/utils/scrollUtils";
 
 interface NavItem {
   url: string;
@@ -62,7 +60,7 @@ const Navbar: FC<NavbarData> = ({ data }) => {
 
   const [scrolled, setScrolled] = useState(false);
   const [mobileHeight, setMobileHeight] = useState("100vh");
-  const {theme} = useTheme();
+  const router = useRouter();
 
   const handleScroll = useCallback(() => {
     const isScrolled = window.scrollY > 0;
@@ -107,6 +105,57 @@ const Navbar: FC<NavbarData> = ({ data }) => {
 
   const logoUrl = getStrapiMedia(logo?.logo?.url) || "";
 
+  const sectionMap: { [key: string]: string } = {
+    "comment": "hero",
+    "contact": "advantages",
+  }
+
+  const handleScrollToSection = useCallback(async (sectionName: string) => {
+    if (!isHomePage) {
+      router.push("/");
+
+      await new Promise(resolve => {
+        const checkNavigation = () => {
+          if (window.location.pathname === "/") {
+            resolve(true);
+          } else {
+            setTimeout(checkNavigation, 100)
+          }
+        };
+
+        checkNavigation();
+      })
+
+      await new Promise(resolve => setTimeout(resolve, 200))
+    }
+
+    scrollToSection(sectionName, 1000, -120);
+  }, [isHomePage, pathname, router]);
+
+  const checkIfScrollSection = useCallback((url: string) => {
+
+    for (const keyword in sectionMap) {
+      if (url.includes(keyword)) {
+        handleScrollToSection(sectionMap[keyword])
+        return;
+      }
+    }
+  }, [handleScrollToSection])
+
+  const handleButtonClick = useCallback((url: string) => {
+      checkIfScrollSection(url);
+  }, [checkIfScrollSection])
+
+  const handleNavClick = useCallback((url: string, newTab?: boolean) => {
+    setLocalIsMenuOpen(false);
+
+    if (newTab) {
+      return;
+    }
+
+    checkIfScrollSection(url);
+  }, [checkIfScrollSection]);
+
   const renderNavItems = (
     items: NavItem[],
     part: "left" | "right" | "mobile"
@@ -115,20 +164,34 @@ const Navbar: FC<NavbarData> = ({ data }) => {
       const currentPathSegment = pathname.split("/")[1];
       const urlSegment = url.split("/")[1];
 
+      const urlInLowerCase = url.toLowerCase();
+
+      const isScrollLink = urlInLowerCase.includes("comment") || url.toLowerCase().includes("contact");
+
       return (
         <React.Fragment key={url}>
           <li className="relative group text-center">
-            <NavLink
-              href={url}
-              newTab={newTab}
-              onClick={() => setLocalIsMenuOpen(!localIsMenuOpen)}
-              isActive={currentPathSegment === urlSegment}
-            >
-              {text}
-            </NavLink>
+            {isScrollLink ? (
+              <button
+                onClick={() => handleButtonClick(urlInLowerCase)}
+                className={cn(
+                  `hover:opacity-50 text-base ${currentPathSegment === urlSegment ? "font-bold" : "font-normal"} transition-colors duration-300 `
+                )}
+              >
+                {text}
+                {currentPathSegment === urlSegment && <div className="w-full h-[2px] " />}
+              </button>
+            ) : (
+              <NavLink
+                href={url}
+                newTab={newTab}
+                onClick={() => handleNavClick(url, newTab)}
+                isActive={currentPathSegment === urlSegment}
+              >
+                {text}
+              </NavLink>
+            )}
           </li>
-
-
         </React.Fragment>
       );
     });
@@ -141,7 +204,7 @@ const Navbar: FC<NavbarData> = ({ data }) => {
       )}
     >
       <div className="container mx-auto w-full h-full flex items-center justify-between px-8">
-        <Link href="/" className="py-4 h-full flex items-center -translate-y-1.5">
+        <Link href="/" className="py-4 h-full flex items-center">
           {
             useImage ? (
               <div className="relative w-[100px] h-fit flex flex-col justify-center items-center transition-all duration-300 ease-in-out">
@@ -153,7 +216,7 @@ const Navbar: FC<NavbarData> = ({ data }) => {
                   className="object-contain w-full h-full"
                   priority
                 />
-                <BorrowText className="-translate-y-1.5 text-center"/>
+                <BorrowText className="-translate-y-1.5 text-center" />
               </div>
             ) : (
               <SVGLogoBob />
@@ -171,8 +234,6 @@ const Navbar: FC<NavbarData> = ({ data }) => {
             </div>
           </ul>
         </div>
-
-
 
         {/* 
         {button && (
@@ -223,27 +284,28 @@ const Navbar: FC<NavbarData> = ({ data }) => {
         </div>
       </div>
 
-
       {/* Mobile Menu */}
       <div
         className={cn(
-          "fixed inset-y-0 right-0 z-[9999] bg-white backdrop-blur-3xl lg:hidden",
+          "fixed inset-y-0 right-0 z-[9999] bg-[var(--background)] backdrop-blur-3xl lg:hidden",
           "transition-all duration-300 ease-in-out",
           "w-64",
           localIsMenuOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
         <div className="flex flex-col h-full">
-          <div className="flex justify-end p-4">
+          <div className="flex justify-between items-center p-4">
+            <span className=" text-2xl text-[#0b9bf2] uppercase">Menu</span>
+
             <button
               onClick={() => setLocalIsMenuOpen(!localIsMenuOpen)}
               aria-label="Close menu"
-              className="text-white"
+              className="currentColor"
             >
               <RiCloseLargeLine size={27} aria-hidden="true" />
             </button>
           </div>
-          <ul className="flex-grow flex flex-col items-center justify-start gap-6 text-white p-4">
+          <ul className="flex-grow flex flex-col items-center justify-start gap-6 currentColor p-4">
             {renderNavItems(menus, "mobile")}
             <div className="p-4 w-full flex justify-center">
               {button &&
@@ -263,7 +325,7 @@ const Navbar: FC<NavbarData> = ({ data }) => {
       {/* Overlay */}
       {localIsMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-[9998] md:hidden"
+          className="fixed inset-0 bg-black/50 backdrop-blur-md z-[9998] md:hidden"
           onClick={() => setLocalIsMenuOpen(false)}
         />
       )}
@@ -271,6 +333,4 @@ const Navbar: FC<NavbarData> = ({ data }) => {
   );
 };
 
-
 export default Navbar;
-

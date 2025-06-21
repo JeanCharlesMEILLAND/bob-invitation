@@ -40,6 +40,7 @@ const Hero = () => {
       variants={herocontainerVariants}
       initial="hidden"
       animate="visible"
+      data-section="hero"
     >
       <div className="flex flex-col lg:grid grid-cols-2 gap-8 lg:gap-16">
         <motion.div 
