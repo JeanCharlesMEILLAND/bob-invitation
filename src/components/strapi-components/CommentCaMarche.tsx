@@ -40,7 +40,7 @@ export default function CommentCaMarche({ data }: CommentCaMarcheProps) {
                         height={600}
                         className="object-cover"
                     />
-                    <div className="absolute bottom-1/2 md:bottom-0 translate-y-1/2 md:translate-y-1/3 xl:translate-y-0">
+                    <div className="absolute bottom-1/2 md:bottom-0 translate-y-1/2 md:translate-y-1/3 xl:translate-y-1/">
                         <BobLogoBlured />
                     </div>
                 </div>
