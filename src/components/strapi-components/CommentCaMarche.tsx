@@ -5,6 +5,7 @@ import CommentCaMarcheCard from "../home/commentCaMarche/CommentCaMarcheCard";
 import {titleStyle} from "../home/style"
 import BackgroundStep from "../home/commentCaMarche/BackgroundStep";
 import Image from "next/image";
+import {getStrapiMedia} from "@/utils/url.utils";
 
 export interface Etape {
   titre: string;
@@ -39,11 +40,11 @@ export default function CommentCaMarche({data}: CommentCaMarcheProps) {
             <div
                 className=" absolute bottom-1/2 md:bottom-0 translate-y-1/2 md:translate-y-1/3 xl:translate-y-0 xl:relative opacity-80 xl:opacity-100 -z-20">
               <Image
-                  src={"/svg/bob-steps/bob-logo.svg"}
+                  src={getStrapiMedia(data.image?.url) || "/svg/bob-steps/bob-logo.svg"}
                   alt="Borrow and Back"
                   width={600}
                   height={600}
-                  className="object-cover"
+                  className="object-contain hidden lg:block"
               />
             </div>
             <div className="comment-ca-marche-grid-fixed">

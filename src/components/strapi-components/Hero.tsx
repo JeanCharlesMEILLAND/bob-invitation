@@ -57,7 +57,7 @@ const Hero = ({data}: {
 
   return (
       <motion.div
-          className="relative container mx-auto mt-20 lg:mt-0 px-8 min-h-screen flex justify-start items-center text-[var(--foreground)]"
+          className=" relative container mx-auto mt-20 lg:mt-0 px-8 min-h-screen flex justify-start items-center text-[var(--foreground)]"
           variants={herocontainerVariants}
           initial="hidden"
           animate="visible"

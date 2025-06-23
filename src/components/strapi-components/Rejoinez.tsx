@@ -44,7 +44,7 @@ const Rejoinez: React.FC<RejoignezProps> = ({data}) => {
         )}
 
         <HighlightedText
-            className="max-w-2xl mx-auto [font-family:'Prompt'] uppercase font-black text-3xl md:text-4xl lg:text-4xl text-center text-[var(--foreground)]"
+            className="max-w-3xl mx-auto [font-family:'Prompt'] uppercase font-black text-3xl md:text-4xl lg:text-5xl text-center text-[var(--foreground)]"
             text={titre}/>
         <HighlightedText className="text-center" text={description}/>
 
