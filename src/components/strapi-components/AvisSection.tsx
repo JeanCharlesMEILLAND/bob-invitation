@@ -11,18 +11,20 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import "@/assets/css/avisSection.css"
 import { BobButton } from "../ui/BobButton";
+import Link from "next/link";
 
 interface AvisSection {
     data: {
         title: string;
         avis: AvisInterface[];
-        button: StrapiButton;
+        boutton: StrapiButton;
     }
 }
 
 export default function AvisSection({ data }: AvisSection) {
-    const { avis, title, button } = data;
+    const { avis, title, boutton } = data;
 
+    console.log("Je suis avis section : ", data)
     return (
         <div className="relative container mx-auto px-8 pb-4 pt-4 lg:pt-10 flex flex-col gap-8 md:gap-16 text-[var(--foreground)]" data-section="avis">
             <HighlightedText text={title} style={titleStyle} />
@@ -74,12 +76,20 @@ export default function AvisSection({ data }: AvisSection) {
                     })}
                 </Swiper>
 
-            <div className="mt-8 flex justify-center">
-                <BobButton onClick={() => { }} className="text-[#262626]">
-                    Déposer vos avis
-                </BobButton>
-            </div>
-
+                {boutton && (
+                    <div className="mt-8 flex justify-center">
+                        <Link href={boutton?.url || "/"}
+                            target={boutton?.newTab ? "_blank" : "_self"}
+                            rel={boutton?.newTab ? "noppener noreferrer" : ""}
+                        >
+                            <BobButton onClick={() => { }} className=""
+                                style={{ color: boutton?.textColor ? boutton?.textColor : "#262626" }}
+                            >
+                                {boutton?.text || "Déposer vos avis"}
+                            </BobButton>
+                        </Link>
+                    </div>
+                )}
             </div>
             <style jsx global>{`
         .avis-swiper .swiper-pagination {

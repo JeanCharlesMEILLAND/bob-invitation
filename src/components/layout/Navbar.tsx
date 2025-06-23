@@ -106,7 +106,7 @@ const Navbar: FC<NavbarData> = ({ data }) => {
   const logoUrl = getStrapiMedia(logo?.logo?.url) || "";
 
   const sectionMap: { [key: string]: string } = {
-    "comment": "hero",
+    "comment": "commentCaMarche",
     "contact": "advantages",
   }
 
