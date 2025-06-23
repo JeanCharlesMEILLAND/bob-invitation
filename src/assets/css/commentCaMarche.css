@@ -1,4 +1,6 @@
 /* ==== CommentCaMarche */
+
+
 .comment-ca-marche-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -33,10 +35,10 @@
     gap: .25rem;
     width: 100%; 
     max-width: 379px; 
-    min-width: 280px; 
-    min-height: 310px;
+    min-width: 200px; 
+    min-height: 250px;
     height: auto;
-    background: rgba(217, 217, 217, 0.23);
+    background: #4f4f4f;
     border-radius: 40px;
     padding: 20px;
   }
