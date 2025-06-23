@@ -14,6 +14,13 @@ export default function AvisCard({ avis }: AvisCardPros) {
 
   const imageUrl = avis?.auteurImage ? getStrapiMedia(avis?.auteurImage?.url) : null;
 
+  const getInitial = (name: string) => {
+    if (!name || name.trim() === "") {
+      return;
+    }
+
+    return name?.split(' ').map(n => n.charAt(0)).join('').toUpperCase().slice(0, 2) || 'AA'
+  }
   return (
     <>
       <div className="card-container">
@@ -31,7 +38,7 @@ export default function AvisCard({ avis }: AvisCardPros) {
             ) : (
               <div className={`w-[81px] h-[81px] rounded-full bg-gradient-to-br ${getColorFromName(avis?.auteur)} flex items-center justify-center shadow-lg`}>
                 <span className="text-white font-bold text-xl">
-                  {avis?.auteur?.split(' ').map(n => n.charAt(0)).join('').toUpperCase().slice(0, 2) || 'AA'}
+                  {getInitial(avis?.auteur)}
                 </span>
               </div>
             )}
@@ -52,7 +59,6 @@ export default function AvisCard({ avis }: AvisCardPros) {
           {/* Avis Text */}
           <div className="avis-text">
             <HighlightedText text={avis.avis} className="avis" />
-            {/* <p className="avis">{avis.avis}</p> */}
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ export default function CommentCaMarche({ data }: CommentCaMarcheProps) {
     const { sous_titre, titre, etapes } = data;
 
     return (<>
-        <div className="relative container mx-auto px-8 flex flex-col gap-8 md:gap-16 text-[var(--foreground)]" data-section="commentCaMarche">
+        <div className="relative container mx-auto px-8 pt-4 lg:pt-10  flex flex-col gap-8 md:gap-16 text-[var(--foreground)]" data-section="commentCaMarche">
             <div className="space-y-4">
                 <HighlightedText text={sous_titre} style={titleStyle} />
 
