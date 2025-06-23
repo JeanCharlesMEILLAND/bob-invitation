@@ -31,7 +31,7 @@ export default function CommentCaMarche({ data }: CommentCaMarcheProps) {
                 <HighlightedText text={titre}className="[font-family:'Prompt']  font-black text-3xl md:text-4xl lg:text-[64px] leading-[97px] text-center text-[var(--foreground)]"/>
             </div>
             <div className="relative flex flex-col 2xl:flex-row justify-center items-center gap-16 z-20">
-                <div className=" absolute bottom-0 translate-y-1/3 xl:translate-y-0 xl:relative opacity-80 xl:opacity-100 -z-20">
+                <div className=" absolute bottom-1/2 md:bottom-0 translate-y-1/2 md:translate-y-1/3 xl:translate-y-0 xl:relative opacity-80 xl:opacity-100 -z-20">
                     <Image
                         src={"/svg/bob-steps/bob-logo.svg"}
                         alt="Borrow and Back"

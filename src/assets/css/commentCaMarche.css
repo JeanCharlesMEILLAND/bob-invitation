@@ -42,6 +42,12 @@
     border-radius: 40px;
     padding: 20px;
   }
+
+  @media screen and (max-width: 768px){
+    .whyItWorks-container {
+        padding: 24px;
+    }
+  }
   
   .vector {
     position: absolute;
