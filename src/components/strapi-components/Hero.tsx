@@ -11,8 +11,24 @@ import {
   heroimageVariants,
   herosvgVariants
 } from "../home/hero/hero-variant";
+import {StrapiPictureType} from "@/types/common";
+import {getStrapiMedia} from "@/utils/url.utils";
 
-const Hero = () => {
+const Hero = ({data}: {
+  data: {
+    title: string;
+    sous_titre: string;
+    description: string;
+    picture: StrapiPictureType;
+    downloadLinks: {
+      text: string;
+      url: string;
+      newTab: boolean;
+    }[];
+  }
+}) => {
+
+  console.log(data)
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.scrollTo) {
@@ -52,7 +68,7 @@ const Hero = () => {
               variants={heroimageVariants}
           >
             <HeroImage
-                src="/images/bob-1 1.png"
+                src={getStrapiMedia(data.picture.url) || "/images/bob-1 1.png"}
                 alt="Borrow and Back"
             />
           </motion.div>
@@ -68,9 +84,9 @@ const Hero = () => {
 
           <motion.div variants={herocontentVariants}>
             <HeroContent
-                title="<h1>BORROW & BACK</h1>"
-                subtitle="Partagez, Empruntez, Réduisez vos Dépenses avec BOB !"
-                description="Avec Bob, gérez vos prêts d'objets et d'argent en toute simplicité. Ajoutez vos amis, définissez des rappels et gardez le contrôle sans jamais rien oublier !"
+                title={data.title}
+                subtitle={data.sous_titre}
+                description={data.description}
                 downloadText="Téléchargez l'application"
                 onAndroidDownload={handleAndroidDownload}
                 onIOSDownload={handleIOSDownload}
