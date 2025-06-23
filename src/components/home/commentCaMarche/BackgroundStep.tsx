@@ -10,27 +10,11 @@ interface Step {
 export default function BackgroundStep() {
 
     const steps: Step[] = [
-        {
-            svg: "/svg/bob-steps/step1.svg",
-            stepTitle: "Emprunter"
-        },
-
-        {
-            svg: "/svg/bob-steps/step2.svg",
-            stepTitle: "Prêter"
-        },
-
-        {
-            svg: "/svg/bob-steps/step3.svg",
-            stepTitle: "Services"
-        },
-
-        {
-            svg: "/svg/bob-steps/step4.svg",
-            stepTitle: "Créer un collectif"
-        },
-    ]
-
+        {svg: "/svg/bob-steps/step1.svg",stepTitle: "Emprunter"},
+        {svg: "/svg/bob-steps/step2.svg",stepTitle: "Prêter"},
+        {svg: "/svg/bob-steps/step3.svg",stepTitle: "Services"},
+        {svg: "/svg/bob-steps/step4.svg",stepTitle: "Créer un collectif"},
+    ];
 
     return (
         <>

@@ -1,3 +1,4 @@
+/* ==== avisSection */
 .swiper-pagination {
     display: none;
 }
@@ -5,22 +6,103 @@
 .avis-swiper .swiper-pagination {
     position: relative;
     margin-top: 2rem;
-  }
-  
-  .avis-swiper .swiper-pagination-bullet {
+}
+
+.avis-swiper .swiper-pagination-bullet {
     width: 12px;
     height: 12px;
     margin: 0 6px;
     transition: all 0.3s ease;
-  }
-  
-  .avis-swiper .swiper-slide {
+}
+
+.avis-swiper .swiper-slide {
     height: auto;
     display: flex;
     align-items: stretch;
-  }
-  
-  .avis-swiper .swiper-slide > div {
+}
+
+.avis-swiper .swiper-slide>div {
     width: 100%;
     height: 100%;
-  }
+}
+
+
+/* ==== avisCard */
+.card-container {
+    position: relative;
+    width: 451.39px;
+    height: 344.36px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.025) 10%, rgba(22, 106, 246, 0.21) 61%);
+    backdrop-filter: blur(30px);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.avatar {
+    width: 80.97px;
+    height: 80.97px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 7px;
+}
+
+.avatar-name {
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    color: #0BCAFF;
+    margin: 0 0 11px 0;
+}
+
+.stars-container {
+    display: flex;
+    gap: 5.65px;
+    margin-bottom: 46px;
+}
+
+.star {
+    position: relative;
+    width: 26.99px;
+    height: 26.99px;
+
+}
+
+.star-icon {
+    position: absolute;
+    left: 8.34%;
+    right: 8.33%;
+    top: 8.34%;
+    bottom: 8.33%;
+    background: #FFC117;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.avis-text {
+    width: 100%;
+    max-width: 321.09px;
+}
+
+.avis {
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0;
+}
