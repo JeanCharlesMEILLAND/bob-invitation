@@ -24,7 +24,7 @@ export type DefaultSeo = {
   publisher: string | null;
 };
 
-type MenusLink = {
+export type MenusLink = {
   url: string;
   text: string;
   newTab: boolean;

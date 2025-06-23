@@ -1,5 +1,6 @@
 import {Inter, Outfit, Prompt} from "next/font/google";
 import "./globals.css";
+import "@/assets/css/container.css";
 import {getFooter, getNavbar} from "@/utils/get-global-data";
 import ClientLayout from "./ClientLayout";
 

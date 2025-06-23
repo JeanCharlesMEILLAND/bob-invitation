@@ -18,7 +18,7 @@ export default function BackgroundStep() {
 
     return (
         <>
-            <div className="grid grid-cols-2 gap-4">
+            <div className=" w-[130%] h-[130%] md:w-full md:h-full grid grid-cols-2 gap-8 md:gap-4">
 
                 {
                     steps.map((step, index) => {

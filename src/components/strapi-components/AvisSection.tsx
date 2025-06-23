@@ -33,14 +33,16 @@ export default function AvisSection({ data }: AvisSection) {
                     modules={[Autoplay, Pagination]}
                     spaceBetween={32}
                     centeredSlides={true}
-                    autoplay={{
-                        delay: 4000,
-                        disableOnInteraction: false,
-                    }}
+                    // autoplay={{
+                    //     delay: 4000,
+                    //     disableOnInteraction: false,
+                    // }}
                     pagination={{
+                        type: 'bullets',
                         clickable: true,
                         bulletClass: 'swiper-pagination-bullet !opacity-30',
                         bulletActiveClass: 'swiper-pagination-bullet-active !opacity-100',
+                        dynamicBullets: false,
                     }}
                     breakpoints={{
                         320: {
@@ -56,7 +58,7 @@ export default function AvisSection({ data }: AvisSection) {
                             spaceBetween: 32,
                         },
                     }}
-                    className="avis-swiper"
+                    className="avis-swiper avis-swiper-glow"
                 >
                     {avis && avis.map((av, index) => {
                         if (!av) {
@@ -65,8 +67,9 @@ export default function AvisSection({ data }: AvisSection) {
                         return (
                             <SwiperSlide key={index} className="py-4 transition-transform duration-300">
                                 {({ isActive }) => (
-                                    <div className={`transition-transform duration-300 ${isActive ? 'lg:scale-110' : 'lg:scale-95 lg:opacity-80'
-                                        }`}>
+                                    <div className={`transition-all duration-300 ${isActive ? 'xl:scale-110' : 'xl:scale-95 xl:opacity-80 contrast-50'
+                                        }`}
+                                        >
                                         <AvisCard avis={av} />
                                     </div>
                                 )}
@@ -81,8 +84,8 @@ export default function AvisSection({ data }: AvisSection) {
                             target={boutton?.newTab ? "_blank" : "_self"}
                             rel={boutton?.newTab ? "noppener noreferrer" : ""}
                         >
-                            <BobButton onClick={() => { }} className=""
-                                style={{ color: boutton?.textColor ? boutton?.textColor : "#262626" }}
+                            <BobButton onClick={() => { }} className="px-8"
+                                style={{ color: boutton?.textColor ? boutton?.textColor : "#262626", padding:"8px 32px" }}
                             >
                                 {boutton?.text || "Déposer vos avis"}
                             </BobButton>

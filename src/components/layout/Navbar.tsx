@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeLine } from "react-icons/ri";
-import { NavbarData } from "@/types/common";
+import { MenusLink, NavbarData, StrapiButton } from "@/types/common";
 import { cn } from "@/utils/css.utils";
 import StrapiButtonLink from "@/components/common/buttons/StrapiButtonLink";
 import { getStrapiMedia } from "@/utils/url.utils";
@@ -14,6 +14,7 @@ import ThemeSwitcher from "../common/ThemeSwitcher";
 import SVGLogoBob from "@/assets/svg/SVGLogoBob";
 import BorrowText from "../ui/BorrowText";
 import { scrollToSection } from "@/utils/scrollUtils";
+import { createPortal } from "react-dom";
 
 interface NavItem {
   url: string;
@@ -107,7 +108,7 @@ const Navbar: FC<NavbarData> = ({ data }) => {
 
   const sectionMap: { [key: string]: string } = {
     "comment": "commentCaMarche",
-    "contact": "advantages",
+    "contact": "rejoignez",
   }
 
   const handleScrollToSection = useCallback(async (sectionName: string) => {
@@ -117,9 +118,11 @@ const Navbar: FC<NavbarData> = ({ data }) => {
       await new Promise(resolve => {
         const checkNavigation = () => {
           if (window.location.pathname === "/") {
-            resolve(true);
+            setTimeout(() => {
+              resolve(true);
+            }, 500)
           } else {
-            setTimeout(checkNavigation, 100)
+            setTimeout(checkNavigation, 500)
           }
         };
 
@@ -143,7 +146,7 @@ const Navbar: FC<NavbarData> = ({ data }) => {
   }, [handleScrollToSection])
 
   const handleButtonClick = useCallback((url: string) => {
-      checkIfScrollSection(url);
+    checkIfScrollSection(url);
   }, [checkIfScrollSection])
 
   const handleNavClick = useCallback((url: string, newTab?: boolean) => {
@@ -199,8 +202,8 @@ const Navbar: FC<NavbarData> = ({ data }) => {
   return (
     <nav
       className={cn(
-        "sticky w-full h-24 md:h-24 flex items-center transition-all ease-in-out duration-150 text-[var(--foreground)] z-[999]",
-        scrolled ? "top-0 bg-[var(--background)]/60 backdrop-blur-sm" : "top-6"
+        "sticky w-full h-24 md:h-24 flex items-center transition-all ease-in-out duration-150 bg-[var(--background)]/60 text-[var(--foreground)] z-[999]",
+        scrolled ? "top-0 bg-[var(--background)]/60 backdrop-blur-sm" : "bg-[var(--background)]/60 top-6"
       )}
     >
       <div className="container mx-auto w-full h-full flex items-center justify-between px-8">
@@ -285,22 +288,69 @@ const Navbar: FC<NavbarData> = ({ data }) => {
       </div>
 
       {/* Mobile Menu */}
+      <MobileMenu 
+      button={button} 
+      localIsMenuOpen={localIsMenuOpen} 
+      menus={menus} 
+      renderNavItems={renderNavItems} 
+      scrolled={scrolled} 
+      setLocalIsMenuOpen={setLocalIsMenuOpen} 
+      />
+
+      {/* Overlay */}
+      {localIsMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-md z-[9998] md:hidden"
+          onClick={() => setLocalIsMenuOpen(false)}
+        />
+      )}
+
+    </nav>
+  );
+};
+
+interface MobileMenuProps {
+  renderNavItems: (items: NavItem[], part: "left" | "right" | "mobile") => React.JSX.Element[];
+  localIsMenuOpen: boolean;
+  scrolled: boolean;
+  setLocalIsMenuOpen: (value: React.SetStateAction<boolean>) => void;
+  menus: MenusLink[];
+  button: StrapiButton[];
+
+}
+
+function MobileMenu({ localIsMenuOpen, scrolled, setLocalIsMenuOpen, renderNavItems, menus, button }: MobileMenuProps) {
+
+
+  return createPortal(
+    <>
       <div
         className={cn(
-          "fixed inset-y-0 right-0 z-[9999] bg-[var(--background)] backdrop-blur-3xl lg:hidden",
+          "fixed inset-0 z-[9998] lg:hidden",
+          "bg-black/50 backdrop-blur-sm",
+          "transition-opacity duration-300 ease-in-out",
+          localIsMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        )}
+        onClick={() => setLocalIsMenuOpen(false)}
+        aria-hidden="true"
+      />
+
+      <div
+        className={cn(
+          "fixed inset-y-0 right-0 z-[9999] lg:hidden",
           "transition-all duration-300 ease-in-out",
           "w-64",
-          localIsMenuOpen ? "translate-x-0" : "translate-x-full"
+          localIsMenuOpen ? "translate-x-0" : "translate-x-full",
+          scrolled ? "bg-[var(--background)]/60 backdrop-blur-sm" : "bg-[var(--background)]/60 backdrop-blur-3xl"
         )}
       >
         <div className="flex flex-col h-full">
           <div className="flex justify-between items-center p-4">
-            <span className=" text-2xl text-[#0b9bf2] uppercase">Menu</span>
-
+            <span className="text-2xl text-[var(--primary)] uppercase">Menu</span>
             <button
               onClick={() => setLocalIsMenuOpen(!localIsMenuOpen)}
               aria-label="Close menu"
-              className="currentColor"
+              className="currentColor active:scale-95 transition"
             >
               <RiCloseLargeLine size={27} aria-hidden="true" />
             </button>
@@ -314,23 +364,19 @@ const Navbar: FC<NavbarData> = ({ data }) => {
                     key={btn.url}
                     {...btn}
                     responsive={true}
-                    className="mb-2 w-fit text-xs "
+                    className="mb-2 w-fit text-xs"
                   />
                 ))}
             </div>
           </ul>
+          <div className="-translate-y-1/2">
+            <SVGLogoBob />
+          </div>
         </div>
       </div>
-
-      {/* Overlay */}
-      {localIsMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-md z-[9998] md:hidden"
-          onClick={() => setLocalIsMenuOpen(false)}
-        />
-      )}
-    </nav>
-  );
-};
+    </>,
+    document.body
+  )
+}
 
 export default Navbar;

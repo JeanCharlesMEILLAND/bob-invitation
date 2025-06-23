@@ -33,18 +33,31 @@
   display: flex;
   flex-direction: column;
   gap: .25rem;
-  width: 100%;
-  max-width: 379px;
+  width: 110%;
+  max-width: 380px;
   min-width: 200px;
   min-height: 250px;
   height: auto;
   background: #4f4f4f;
   border-radius: 40px;
-  padding: 20px;
+  padding: 30px;
 }
 
 @media screen and (max-width: 768px) {
   .whyItWorks-container {
+    padding: 24px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .whyItWorks-container {
+    padding: 24px;
+  }
+}
+
+@media screen and (max-width: 1580px){
+  .whyItWorks-container {
+    width: 100%;
     padding: 24px;
   }
 }
@@ -78,7 +91,7 @@
 
 .title-container {
   width: calc(100% - 15px);
-  max-width: 210px;
+  max-width: 300px;
   height: auto;
   left: 34px;
   top: 112px;
@@ -95,6 +108,13 @@
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--primary);
+}
+
+@media screen and (max-width: 1536px) {
+  .title-container h3 {
+    white-space: wrap;
+  }
+  
 }
 
 .description-container {
@@ -137,10 +157,11 @@
   font-family: 'Prompt';
   font-style: normal;
   font-weight: 600;
-  font-size: 37.1972px;
+  font-size: 32px;
   line-height: 120%;
   display: flex;
   align-items: flex-end;
   letter-spacing: -0.951665px;
   color: #FFFAEF;
+  text-align: center;
 }
