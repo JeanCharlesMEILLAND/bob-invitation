@@ -10,6 +10,7 @@ import { useTheme } from "@/context/themeContext";
 import { StrapiPictureType } from "@/types/common";
 import { getStrapiMedia } from "@/utils/url.utils";
 import BlocQr from "../home/advantages/BlocQr";
+import { titleStyle } from "../home/style";
 
 export interface AdvantagesBloc {
     name: string;
@@ -52,16 +53,4 @@ export default function Advantages() {
     )
 }
 
-
-
-const titleStyle: React.CSSProperties = {
-    fontFamily: 'Outfit',
-    fontStyle: "normal",
-    fontWeight: 300,
-    fontSize: "24px",
-    lineHeight: "30px",
-    textAlign: "center",
-    letterSpacing: "1.02em",
-    textTransform: "uppercase",
-}
 

@@ -3,23 +3,43 @@ import {fetchAPI} from "@/utils/api.utils";
 
 export const getPageBySlug = cache(async (slug: string) => {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-
   if (!token) {
     throw new Error("Missing Strapi API Token");
   }
-
+  
   const path = "/pages";
-
   const urlParamsObject = {
-    populate: [
-      "contentSections",
-      "seo",
-    ],
-    filters: {slug},
+    populate: {
+      contentSections: {
+        populate: '*',
+        on: {
+          'sections.hero': {
+            populate: '*'
+          },
+          'sections.advantages': {
+            populate: '*'
+          },
+          'sections.avis-section': {
+            populate: ['avis']
+          },
+          'sections.comment-ca-marche': {
+            populate: '*'
+          },
+          'sections.pourquoi-choisir-bob': {
+            populate: '*'
+          },
+          'sections.rejoinez': {
+            populate: '*'
+          }
+        }
+      },
+      seo: true
+    },
+    filters: { slug }
   };
-
-  const options = {headers: {Authorization: `Bearer ${token}`}};
-
+  
+  const options = { headers: { Authorization: `Bearer ${token}` } };
+  
   try {
     return await fetchAPI(path, urlParamsObject, options);
   } catch (error) {
