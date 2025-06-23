@@ -6,7 +6,7 @@ export const getPageBySlug = cache(async (slug: string) => {
   if (!token) {
     throw new Error("Missing Strapi API Token");
   }
-  
+
   const path = "/pages";
   const urlParamsObject = {
     populate: {
@@ -36,11 +36,11 @@ export const getPageBySlug = cache(async (slug: string) => {
       },
       seo: true
     },
-    filters: { slug }
+    filters: {slug}
   };
-  
-  const options = { headers: { Authorization: `Bearer ${token}` } };
-  
+
+  const options = {headers: {Authorization: `Bearer ${token}`}};
+
   try {
     return await fetchAPI(path, urlParamsObject, options);
   } catch (error) {

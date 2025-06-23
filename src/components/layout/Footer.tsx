@@ -50,8 +50,7 @@ const ContactSection: FC<{
 const Footer: FC<FooterData> = ({data}) => {
   const {logo, contacts, socialLinks, legalLinks, menus} = data;
   const [isHovered, setIsHovered] = useState(false);
-
-
+  
   return (
       <div className="relative">
         <footer className="bg-primary-900 text-primary-50 relative z-10">
@@ -66,7 +65,7 @@ const Footer: FC<FooterData> = ({data}) => {
               />
 
               <div className="h-fit flex-1 flex-col justify-end items-end gap-12">
-               
+
                 <div className="w-full h-[1.5px] bg-white/50 mt-8"/>
                 <div className="w-full flex flex-row gap-4 items-center justify-center py-4 mt-2">
                   {menus.map(item => (

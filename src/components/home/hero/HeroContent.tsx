@@ -1,7 +1,12 @@
 import HighlightedText from "@/components/common/HighlightedText";
-import { HeroCTA } from "./HeroCta";
-import { motion, Variants } from "framer-motion";
-import { heroContentcontentVariants, heroContentctaVariants, heroContentitemVariants, heroContenttitleVariants } from "./hero-variant";
+import {HeroCTA} from "./HeroCta";
+import {motion} from "framer-motion";
+import {
+  heroContentcontentVariants,
+  heroContentctaVariants,
+  heroContentitemVariants,
+  heroContenttitleVariants
+} from "./hero-variant";
 
 interface HeroContentProps {
   title: string;
@@ -13,53 +18,52 @@ interface HeroContentProps {
 }
 
 export function HeroContent({
-  title,
-  subtitle,
-  description,
-  downloadText,
-  onAndroidDownload,
-  onIOSDownload
-}: HeroContentProps) {
-
- 
-
+                              title,
+                              subtitle,
+                              description,
+                              downloadText,
+                              onAndroidDownload,
+                              onIOSDownload
+                            }: HeroContentProps) {
   return (
-    <motion.div 
-      className="flex flex-col items-center lg:items-start gap-8"
-      variants={heroContentcontentVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      {/* Titre */}
-      <motion.div variants={heroContenttitleVariants}>
-        <HighlightedText text={title} style={titleStyle} className={textMediaQueries + " text-4xl md:text-5xl lg:text-[74px] lg:[line-height:112px]"}/>
-      </motion.div>
+      <motion.div
+          className="flex flex-col items-center lg:items-start gap-8"
+          variants={heroContentcontentVariants}
+          initial="hidden"
+          animate="visible"
+      >
+        {/* Titre */}
+        <motion.div variants={heroContenttitleVariants}>
+          <HighlightedText text={title} style={titleStyle}
+                           className={textMediaQueries + " text-4xl md:text-5xl lg:text-[74px] lg:[line-height:112px]"}/>
+        </motion.div>
 
-      <motion.div variants={heroContentitemVariants}>
-        <HighlightedText text={subtitle} style={subtitleStyle} className={textMediaQueries + " text-2xl md:text-3xl lg:text-[36px]"}/>
-      </motion.div>
+        <motion.div variants={heroContentitemVariants}>
+          <HighlightedText text={subtitle} style={subtitleStyle}
+                           className={textMediaQueries + " text-2xl md:text-3xl lg:text-[36px]"}/>
+        </motion.div>
 
-      <motion.div variants={heroContentitemVariants}>
-        <HighlightedText text={description} style={descriptionStyle} className={textMediaQueries}/>
-      </motion.div>
+        <motion.div variants={heroContentitemVariants}>
+          <HighlightedText text={description} style={descriptionStyle} className={textMediaQueries}/>
+        </motion.div>
 
-      <motion.div variants={heroContentctaVariants}>
-        <HeroCTA
-          downloadText={downloadText}
-          androidButtonProps={{
-            iconSrc: "/images/buttons/downloadonandroid.png",
-            iconAlt: "Download on Android",
-            onClick: onAndroidDownload
-          }}
-          iosButtonProps={{
-            iconSrc: "/images/buttons/downloadonapple.png",
-            iconAlt: "Download on Apple Store",
-            onClick: onIOSDownload
-          }}
-          textMediaQueries={textMediaQueries}
-        />
+        <motion.div variants={heroContentctaVariants}>
+          <HeroCTA
+              downloadText={downloadText}
+              androidButtonProps={{
+                iconSrc: "/images/buttons/downloadonandroid.png",
+                iconAlt: "Download on Android",
+                onClick: onAndroidDownload
+              }}
+              iosButtonProps={{
+                iconSrc: "/images/buttons/downloadonapple.png",
+                iconAlt: "Download on Apple Store",
+                onClick: onIOSDownload
+              }}
+              textMediaQueries={textMediaQueries}
+          />
+        </motion.div>
       </motion.div>
-    </motion.div>
   );
 }
 
