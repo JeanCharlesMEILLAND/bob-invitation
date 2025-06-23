@@ -24,7 +24,6 @@ interface AvisSection {
 export default function AvisSection({ data }: AvisSection) {
     const { avis, title, boutton } = data;
 
-    console.log("Je suis avis section : ", data)
     return (
         <div className="relative container mx-auto px-8 pb-4 pt-4 lg:pt-10 flex flex-col gap-8 md:gap-16 text-[var(--foreground)]" data-section="avis">
             <HighlightedText text={title} style={titleStyle} />
@@ -64,7 +63,7 @@ export default function AvisSection({ data }: AvisSection) {
                             return null;
                         }
                         return (
-                            <SwiperSlide key={index} className="pb-4 transition-transform duration-300">
+                            <SwiperSlide key={index} className="py-4 transition-transform duration-300">
                                 {({ isActive }) => (
                                     <div className={`transition-transform duration-300 ${isActive ? 'lg:scale-110' : 'lg:scale-95 lg:opacity-80'
                                         }`}>
@@ -91,30 +90,7 @@ export default function AvisSection({ data }: AvisSection) {
                     </div>
                 )}
             </div>
-            <style jsx global>{`
-        .avis-swiper .swiper-pagination {
-          position: relative;
-          margin-top: 2rem;
-        }
-        
-        .avis-swiper .swiper-pagination-bullet {
-          width: 12px;
-          height: 12px;
-          margin: 0 6px;
-          transition: all 0.3s ease;
-        }
-        
-        .avis-swiper .swiper-slide {
-          height: auto;
-          display: flex;
-          align-items: stretch;
-        }
-        
-        .avis-swiper .swiper-slide > div {
-          width: 100%;
-          height: 100%;
-        }
-      `}</style>
+          
         </div>
     );
 }

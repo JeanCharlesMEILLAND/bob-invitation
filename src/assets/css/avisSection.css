@@ -1,3 +1,26 @@
 .swiper-pagination {
     display: none;
 }
+
+.avis-swiper .swiper-pagination {
+    position: relative;
+    margin-top: 2rem;
+  }
+  
+  .avis-swiper .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    transition: all 0.3s ease;
+  }
+  
+  .avis-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+    align-items: stretch;
+  }
+  
+  .avis-swiper .swiper-slide > div {
+    width: 100%;
+    height: 100%;
+  }

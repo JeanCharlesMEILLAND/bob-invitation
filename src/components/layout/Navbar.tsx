@@ -164,16 +164,16 @@ const Navbar: FC<NavbarData> = ({ data }) => {
       const currentPathSegment = pathname.split("/")[1];
       const urlSegment = url.split("/")[1];
 
-      const urlInLowerCase = url.toLowerCase();
+      const textInLowerCase = text.toLowerCase();
 
-      const isScrollLink = urlInLowerCase.includes("comment") || url.toLowerCase().includes("contact");
+      const isScrollLink = textInLowerCase.includes("comment") || url.toLowerCase().includes("contact");
 
       return (
         <React.Fragment key={url}>
           <li className="relative group text-center">
             {isScrollLink ? (
               <button
-                onClick={() => handleButtonClick(urlInLowerCase)}
+                onClick={() => handleButtonClick(textInLowerCase)}
                 className={cn(
                   `hover:opacity-50 text-base ${currentPathSegment === urlSegment ? "font-bold" : "font-normal"} transition-colors duration-300 `
                 )}
