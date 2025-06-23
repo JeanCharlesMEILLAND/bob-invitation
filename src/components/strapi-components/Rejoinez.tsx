@@ -30,7 +30,7 @@ const Rejoinez: React.FC<RejoignezProps> = ({data}) => {
   const {titre, description, image, lien_telechargements, lien_reseaux_sociaux} = data;
 
   return (
-      <div className="container mx-auto px-8 space-y-8">
+      <div className="container mx-auto px-8 space-y-8 pt-14">
         {image && (
             <div className="flex justify-center">
               <Image
