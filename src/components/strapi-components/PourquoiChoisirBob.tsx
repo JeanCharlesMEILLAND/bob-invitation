@@ -29,7 +29,7 @@ const PourquoiChoisirBob = ({ data }: {
               <div key={index}
                 className="-ml-[9px] flex gap-4 items-start lg:flex-col justify-start lg:justify-between">
                 <div
-                  className={`lg:hidden w-4 h-4 min-w-[1rem] min-h-[1rem] bg-[var(--background)] rounded-full self-start flex-shrink-0`}></div>
+                  className={`lg:hidden w-4 h-4 min-w-[1rem] min-h-[1rem] bg-[var(--foreground)] rounded-full self-start flex-shrink-0`}></div>
                 <div>
                   <h3 className={`text-lg font-semibold uppercase mb-4 pourquoi-subtitle`}>{avantage.titre}</h3>
                   <HighlightedText className={`max-w-md  pourquoi-description`}

@@ -1,0 +1,29 @@
+
+
+.title-rejoignez {
+    font-style: normal;
+    font-weight: 900;
+    font-family: 'Outfit';
+    color: currentColor;
+    font-size: 36px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 45px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .title-rejoignez {
+      line-height: 38px;
+      font-size: 30px;
+    }
+  }
+  
+  .description-rejoignez {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    font-family: 'Outfit';
+    line-height: 25px;
+    color: currentColor;
+    text-align: center;
+  }

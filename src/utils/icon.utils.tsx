@@ -14,11 +14,14 @@ type Social = {
   className?: string;
 };
 
-const createIcon = (Icon: JSX.ElementType) => (
-  <div className="rounded-full bg-white p-2">
-    <Icon size={27} color="#3D3D3D" />
+const createIcon = (Icon: JSX.ElementType) => {
+  return(
+  <div className="rounded-full p-2 transition-colors duration-100 ease"
+  style={{backgroundColor: "var(--foreground)"}}
+  >
+    <Icon size={27} color="var(--background)" />
   </div>
-);
+);}
 
 const iconMap: { [key: string]: JSX.Element } = {
   WEBSITE: createIcon(CgWebsite),
