@@ -95,9 +95,10 @@
   height: auto;
   left: 34px;
   top: 112px;
+  
 }
 
-.title-container h3 {
+.title-container h3, .title-container h2 {
   margin: 0;
   font-family: 'Prompt', sans-serif;
   font-style: normal;

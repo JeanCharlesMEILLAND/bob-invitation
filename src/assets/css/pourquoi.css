@@ -1,0 +1,47 @@
+
+.pourquoi-container {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(22, 106, 246, 0.21) 50%);
+    backdrop-filter: blur(30px);
+    border-radius: 50px;
+  }
+  
+  .pourquoi-title {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 81px;
+    text-transform: uppercase;
+    color: currentColor;
+  }
+
+  @media screen and (max-width: 768px) {
+    .pourquoi-title {
+        font-size: 40px;
+        text-align: center;
+    }
+  }
+  
+  .pourquoi-subtitle {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  
+  
+  .pourquoi-description {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  }
+  
+  
+  .pourquoi-line {
+  border: 1px solid currentColor;
+  }
