@@ -49,10 +49,9 @@ const Rejoinez: React.FC<RejoignezProps> = ({data}) => {
         <HighlightedText className="text-center" text={description}/>
 
 
-        <div className={"flex justify-between items-end"}>
+        <div className={"flex flex-col lg:flex-row justify-between items-center lg:items-end gap-8"}>
           <div></div>
-
-          <div className={"flex justify-center gap-4 pl-20"}>
+          <div className={"flex justify-center gap-4 lg:pl-20"}>
             <BobButton
                 iconSrc={"/images/buttons/downloadonandroid.png"}
                 iconAlt={"Download on Android"}
@@ -72,7 +71,6 @@ const Rejoinez: React.FC<RejoignezProps> = ({data}) => {
                 }}
             />
           </div>
-
           <div className="flex justify-center space-x-4">
             {lien_reseaux_sociaux.map((social, index) => (
                 <span key={index}>{renderSocialIcon(social)}</span>
