@@ -24,7 +24,7 @@ const PourquoiChoisirBob = ({ data }: {
             className="[font-family:'Prompt']  font-black text-3xl md:text-4xl lg:text-[64px] text-left uppercase max-w-lg text-[var(--foreground)] pourquoi-title"
             text={data.titre} />
           <div
-            className={`border-l-2 lg:border-l-0 border-[var(--foreground)] flex flex-col gap-10 lg:grid lg:grid-cols-4 gap-4 lg:gap-10 lg:auto-rows-fr mt-10`}>
+            className={`border-l-2 lg:border-l-0 border-[var(--foreground)] flex flex-col lg:grid lg:grid-cols-4 gap-8 lg:gap-10 lg:auto-rows-fr mt-10`}>
             {data.avantages.map((avantage, index: number) => (
               <div key={index}
                 className="-ml-[9px] flex gap-4 items-start lg:flex-col justify-start lg:justify-between">
@@ -41,7 +41,7 @@ const PourquoiChoisirBob = ({ data }: {
             ))}
           </div>
           <div
-            className={`hidden lg:block -mt-[10px] w-full h-0.25 bg-[var(--background)]`}></div>
+            className={`hidden lg:block -mt-[10px] w-full h-0.25 bg-[var(--foreground)]`}></div>
         </div>
         <div className="group relative w-full lg:w-2/12">
           <Image
