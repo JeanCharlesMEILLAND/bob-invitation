@@ -1,10 +1,10 @@
-import { createElement, lazy, ReactElement, Suspense } from "react";
+import {createElement, lazy, ReactElement, Suspense} from "react";
 import Loader from "@/components/common/Loader";
 
 export default function componentResolver(
-  section: any,
-  index: number,
-  searchParams?: { [key: string]: string | string[] | undefined },
+    section: any,
+    index: number,
+    searchParams?: { [key: string]: string | string[] | undefined },
 ): ReactElement {
   const names: string[] = section.__component.split(".");
 
@@ -19,27 +19,27 @@ export default function componentResolver(
   });
 
   const myModule = lazy(() =>
-    import(`../components/strapi-components/${componentName}`).catch(
-      (error) => {
-        console.warn(`Component not found: ${componentName}`, error);
-        return {
-          default: () => (
-            <div className="p-4 my-4 bg-yellow-100 text-yellow-800 rounded border border-yellow-300">
-              <p className="font-bold">Component Not Found</p>
-              <p>
-                The component &#34;{componentName}&#34; ({section.__component}) could
-                not be loaded.
-              </p>
-              {process.env.NODE_ENV === "development" && (
-                <pre className="mt-2 text-xs overflow-auto">
+      import(`../components/strapi-components/${componentName}`).catch(
+          (error) => {
+            console.warn(`Component not found: ${componentName}`, error);
+            return {
+              default: () => (
+                  <div className="p-4 my-4 bg-yellow-100 text-yellow-800 rounded border border-yellow-300">
+                    <p className="font-bold">Component Not Found</p>
+                    <p>
+                      The component &#34;{componentName}&#34; ({section.__component}) could
+                      not be loaded.
+                    </p>
+                    {process.env.NODE_ENV === "development" && (
+                        <pre className="mt-2 text-xs overflow-auto">
                   {JSON.stringify(section, null, 2)}
                 </pre>
-              )}
-            </div>
-          ),
-        };
-      },
-    ),
+                    )}
+                  </div>
+              ),
+            };
+          },
+      ),
   );
 
   const reactElement = createElement(myModule, {
@@ -49,11 +49,11 @@ export default function componentResolver(
   });
 
   return (
-    <Suspense fallback={<Loader />} key={index}>
-      <div className="mb-10 overflow-hidden min-w-80">
-        {reactElement}
-      </div>
-    </Suspense>
+      <Suspense fallback={<Loader/>} key={index}>
+        <div className="mb-10 min-w-80">
+          {reactElement}
+        </div>
+      </Suspense>
   );
 }
 
