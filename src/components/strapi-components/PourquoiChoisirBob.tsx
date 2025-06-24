@@ -18,7 +18,7 @@ const PourquoiChoisirBob = ({ data }: {
   return (
     <div className="container px-8 mx-auto">
       <div
-        className="relative bg-gradient-to-b from-white/20 to-[#166AF6]/20 mt-32 px-10 lg:px-20  p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between container mx-auto pourquoi-container">
+        className="relative bg-gradient-to-b from-white/20 to-[#166AF6]/20 mt-32 px-0 md:px-10 lg:px-20  p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between container mx-auto pourquoi-container">
         <div className="w-10/12">
           <HighlightedText
             className="[font-family:'Prompt']  font-black text-3xl md:text-4xl lg:text-[64px] text-left uppercase max-w-lg text-[var(--foreground)] pourquoi-title"
