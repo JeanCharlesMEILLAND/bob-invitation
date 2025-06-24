@@ -13,7 +13,7 @@ export default function ClientLayout({ children, navbarData, footerData }: Clien
   return (
     <ThemeProvider>
       <Navbar data={navbarData} />
-      <main className="min-h-screen">
+      <main className="min-h-screen overflow-hidden">
         {children}
       </main>
       {/* <Footer data={footerData} /> */}

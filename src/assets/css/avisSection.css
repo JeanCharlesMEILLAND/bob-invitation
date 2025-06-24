@@ -128,7 +128,7 @@
 .avatar {
     width: 80.97px;
     height: 80.97px;
-    border-radius: 50%;
+    border-radius: 100%;
     overflow: hidden;
     margin-bottom: 7px;
 }

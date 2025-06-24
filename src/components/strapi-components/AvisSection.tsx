@@ -38,10 +38,11 @@ export default function AvisSection({data}: AvisSection) {
                 modules={[Autoplay, Pagination]}
                 spaceBetween={32}
                 centeredSlides={true}
-                // autoplay={{
-                //     delay: 4000,
-                //     disableOnInteraction: false,
-                // }}
+                initialSlide={1}
+                autoplay={{
+                    delay: 4000,
+                    disableOnInteraction: false,
+                }}
                 pagination={{
                   type: 'bullets',
                   clickable: true,

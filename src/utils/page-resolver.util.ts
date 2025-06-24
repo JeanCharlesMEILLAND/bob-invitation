@@ -20,8 +20,12 @@ export const getPageBySlug = cache(async (slug: string) => {
             populate: '*'
           },
           'sections.avis-section': {
-            populate: ['avis','boutton']
-            
+            populate: {
+              avis: {
+                populate: '*' 
+              },
+              boutton: true
+            }
           },
           'sections.comment-ca-marche': {
             populate: '*'

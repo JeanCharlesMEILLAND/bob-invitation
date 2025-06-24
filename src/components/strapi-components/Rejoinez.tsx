@@ -29,13 +29,15 @@ interface RejoignezProps {
 const Rejoinez: React.FC<RejoignezProps> = ({data}) => {
   const {titre, description, image, lien_telechargements, lien_reseaux_sociaux} = data;
 
+  const imageSrc = image?.url ? getStrapiMedia(image?.url) : null;
+
   return (
       <div className="container mx-auto px-8 space-y-8 pt-14" data-section="rejoignez">
-        {image && (
+        {imageSrc && (
             <div className="flex justify-center">
               <Image
-                  src={getStrapiMedia(image.url) || ""}
-                  alt={image.alternativeText}
+                  src={imageSrc}
+                  alt={image.alternativeText || "QR code BOB(Borrow and Back)"}
                   width={200}
                   height={200}
                   className="object-contain"
