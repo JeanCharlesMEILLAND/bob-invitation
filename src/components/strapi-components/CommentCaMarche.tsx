@@ -9,6 +9,7 @@ import BobLogoBlured from "../home/commentCaMarche/BobLogoBlured";
 import {createPortal} from "react-dom";
 import {useEffect, useState} from "react";
 import "@/assets/css/commentCaMarche.css"
+import {getStrapiMedia} from "@/utils/url.utils";
 
 export interface Etape {
   titre: string;
@@ -18,8 +19,8 @@ export interface Etape {
 
 interface CommentCaMarcheProps {
   data: {
-    sous_titre: string;
     titre: string;
+    sous_titre: string;
     lien: StrapiButton;
     image?: StrapiPictureType;
     etapes: Etape[];
@@ -27,7 +28,7 @@ interface CommentCaMarcheProps {
 }
 
 export default function CommentCaMarche({data}: CommentCaMarcheProps) {
-  const {sous_titre, titre, etapes} = data;
+  const {sous_titre, titre, etapes, image} = data;
 
   return (<>
         <div
@@ -43,7 +44,7 @@ export default function CommentCaMarche({data}: CommentCaMarcheProps) {
             <div className=" relative hidden 2xl:flex opacity-80 xl:opacity-100 -z-40"
             >
               <Image
-                  src={"/svg/bob-steps/bob-logo.svg"}
+                  src={getStrapiMedia(image?.url) || "/svg/bob-steps/bob-logo.svg"}
                   alt="Borrow and Back"
                   width={600}
                   height={600}
