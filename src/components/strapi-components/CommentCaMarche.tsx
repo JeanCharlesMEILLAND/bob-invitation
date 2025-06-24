@@ -38,7 +38,7 @@ export default function CommentCaMarche({data}: CommentCaMarcheProps) {
             <HighlightedText text={sous_titre} style={titleStyle}/>
 
             <HighlightedText text={titre}
-                             className="[font-family:'Prompt']  font-black text-3xl md:text-4xl lg:text-[64px] leading-[97px] text-center text-[var(--foreground)]"/>
+                             className="[font-family:'Prompt']  font-black text-3xl md:text-4xl lg:text-[64px] leading-[60px] lg:leading-[97px] text-center text-[var(--foreground)]"/>
           </div>
           <div className="relative flex flex-col 2xl:flex-row justify-center items-center gap-4 2xl:gap-16 z-30 ">
             <div className=" relative hidden 2xl:flex opacity-80 xl:opacity-100 -z-40"

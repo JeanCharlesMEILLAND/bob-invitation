@@ -50,7 +50,7 @@ export default function componentResolver(
 
   return (
     <Suspense fallback={<Loader />} key={index}>
-      <div className="mb-10">
+      <div className="mb-10 overflow-hidden min-w-80">
         {reactElement}
       </div>
     </Suspense>
