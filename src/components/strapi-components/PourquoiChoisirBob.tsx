@@ -16,7 +16,7 @@ const PourquoiChoisirBob = ({data}: {
   const {theme} = useTheme()
   return (
       <div
-          className="bg-gradient-to-b from-white/20 to-[#166AF6]/20 mt-32 px-20 text-white p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between container mx-auto">
+          className="bg-gradient-to-b from-white/20 to-[#166AF6]/20 mt-32 px-10 lg:px-20 text-white p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between container mx-auto">
         <div className="w-10/12">
           <HighlightedText
               className="[font-family:'Prompt']  font-black text-3xl md:text-4xl lg:text-[64px] text-left uppercase max-w-lg text-[var(--foreground)]"
