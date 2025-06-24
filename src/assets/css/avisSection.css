@@ -1,0 +1,191 @@
+/* ==== avisSection */
+
+.avis-swiper .swiper-wrapper {
+    display: flex;
+    gap: 0rem;
+}
+
+@media screen and (max-width:1536px) {
+    .avis-swiper .swiper-wrapper {
+        gap: 0rem;
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .avis-swiper .swiper-wrapper {
+        gap: 5rem;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    .avis-swiper .swiper-wrapper {
+        gap: 0rem;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .avis-swiper .swiper-wrapper {
+        gap: 0rem;
+    }
+}
+
+.avis-swiper .swiper-pagination {
+    display: none;
+    position: relative;
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+@media screen and (max-width: 1280px) {
+    .avis-swiper .swiper-pagination {
+        display: flex;
+    }
+}
+
+
+.avis-swiper-glow .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--foreground);
+    opacity: 0.4;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 0 var(--primary);
+}
+
+
+.avis-swiper-glow .swiper-pagination-bullet-active {
+    opacity: 1;
+    background-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.2);
+    transform: scale(1.6);
+}
+
+.avis-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+    align-items: stretch;
+}
+
+.avis-swiper .swiper-slide>div {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* ==== avisCard */
+.card-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.025) 10%, rgba(22, 106, 246, 0.21) 61%);
+    backdrop-filter: blur(30px);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+}
+
+
+@media screen and (max-width: 1280px) {
+    .card-container {
+        width: 130%;
+        height: 100%;
+    }
+}
+
+
+@media screen and (max-width: 1024px) {
+    .card-container {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card-container {
+        width: 100%;
+        height: 100%;
+        padding-bottom: 1rem;
+    }
+}
+
+
+
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.avatar {
+    width: 80.97px;
+    height: 80.97px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 7px;
+}
+
+.avatar-name {
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    color: #0BCAFF;
+    margin: 0 0 11px 0;
+}
+
+.stars-container {
+    display: flex;
+    gap: 5.65px;
+    margin-bottom: 46px;
+}
+
+.star {
+    position: relative;
+    width: 26.99px;
+    height: 26.99px;
+
+}
+
+.star-icon {
+    position: absolute;
+    left: 8.34%;
+    right: 8.33%;
+    top: 8.34%;
+    bottom: 8.33%;
+    background: #FFC117;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.avis-text {
+    width: 100%;
+    max-width: 321.09px;
+}
+
+.avis {
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 30px;
+    text-align: center;
+    color: var(--foreground);
+    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .avis {
+        font-size: 20px;
+        line-height: 26px;
+    }
+}

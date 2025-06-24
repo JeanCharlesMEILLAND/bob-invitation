@@ -1,6 +1,7 @@
-import { Inter, Outfit, Prompt } from "next/font/google";
+import {Inter, Outfit, Prompt} from "next/font/google";
 import "./globals.css";
-import { getFooter, getNavbar } from "@/utils/get-global-data";
+import "@/assets/css/container.css";
+import {getFooter, getNavbar} from "@/utils/get-global-data";
 import ClientLayout from "./ClientLayout";
 
 const inter = Inter({
@@ -34,8 +35,8 @@ export const metadata = {
 };
 
 export default async function RootLayout({
-  children,
-}: Readonly<{
+                                           children,
+                                         }: Readonly<{
   children: React.ReactNode;
 }>) {
   const [navbarData, footerData] = await Promise.all([
@@ -45,14 +46,14 @@ export default async function RootLayout({
 
 
   return (
-    <html lang="fr">
+      <html lang="fr">
       <body
-        className={`${inter.variable} ${outfit.variable} ${prompt.variable} antialiased`}
+          className={`${inter.variable} ${outfit.variable} ${prompt.variable} antialiased max-w-screen overflow-x-hidden`}
       >
-        <ClientLayout navbarData={navbarData.data} footerData={footerData.data}>
-          {children}
-        </ClientLayout>
+      <ClientLayout navbarData={navbarData.data} footerData={footerData.data}>
+        {children}
+      </ClientLayout>
       </body>
-    </html>
+      </html>
   );
 }

@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #ededed;
   --foreground: #262626;
+
+  --primary : #0BCAFF;
 }
 
 html.dark {
@@ -11,7 +13,7 @@ html.dark {
 }
 
 html.light {
-  --background: #ffffff;
+  --background: #ededed;
   --foreground: #262626;
 }
 
@@ -57,3 +59,4 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+

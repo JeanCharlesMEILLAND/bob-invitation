@@ -1,8 +1,8 @@
 import HighlightedText from "@/components/common/HighlightedText";
-import { BobButton } from "@/components/ui/BobButton";
-import { motion, Variants } from "framer-motion";
+import {BobButton} from "@/components/ui/BobButton";
+import {motion} from "framer-motion";
 import React from "react";
-import { heroCtabuttonsContainerVariants, heroCtabuttonVariants, heroCtactaVariants, heroCtatextVariants } from "./hero-variant";
+import {heroCtabuttonsContainerVariants, heroCtactaVariants, heroCtatextVariants} from "./hero-variant";
 
 interface HeroCTAProps {
   downloadText?: string;
@@ -20,45 +20,43 @@ interface HeroCTAProps {
 }
 
 export function HeroCTA({
-  downloadText = "Téléchargez l'application",
-  androidButtonProps,
-  iosButtonProps,
-  textMediaQueries 
-}: HeroCTAProps) {
-
-
+                          downloadText = "Téléchargez l'application",
+                          androidButtonProps,
+                          iosButtonProps,
+                          textMediaQueries
+                        }: HeroCTAProps) {
   return (
-    <motion.div
-      className="flex flex-col gap-8"
-      variants={heroCtactaVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <motion.div variants={heroCtatextVariants}>
-        <HighlightedText text={downloadText} style={downloadTextStyle} className={textMediaQueries}/>
-      </motion.div>
-
       <motion.div
-        className="flex flex-row justify-center lg:justify-start gap-4"
-        variants={heroCtabuttonsContainerVariants}
+          className="flex flex-col gap-8"
+          variants={heroCtactaVariants}
+          initial="hidden"
+          animate="visible"
       >
-        {androidButtonProps && (
-            <BobButton
-              iconSrc={androidButtonProps.iconSrc}
-              iconAlt={androidButtonProps.iconAlt}
-              onClick={androidButtonProps.onClick}
-            />
-        )}
+        <motion.div variants={heroCtatextVariants}>
+          <HighlightedText text={downloadText} style={downloadTextStyle} className={textMediaQueries}/>
+        </motion.div>
 
-        {iosButtonProps && (
-            <BobButton
-              iconSrc={iosButtonProps.iconSrc}
-              iconAlt={iosButtonProps.iconAlt}
-              onClick={iosButtonProps.onClick}
-            />
-        )}
+        <motion.div
+            className="flex flex-row justify-center lg:justify-start gap-4"
+            variants={heroCtabuttonsContainerVariants}
+        >
+          {androidButtonProps && (
+              <BobButton
+                  iconSrc={androidButtonProps.iconSrc}
+                  iconAlt={androidButtonProps.iconAlt}
+                  onClick={androidButtonProps.onClick}
+              />
+          )}
+
+          {iosButtonProps && (
+              <BobButton
+                  iconSrc={iosButtonProps.iconSrc}
+                  iconAlt={iosButtonProps.iconAlt}
+                  onClick={iosButtonProps.onClick}
+              />
+          )}
+        </motion.div>
       </motion.div>
-    </motion.div>
   );
 }
 

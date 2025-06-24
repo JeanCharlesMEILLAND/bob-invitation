@@ -5,6 +5,7 @@ interface ThemeContextType {
   theme: "light" | "dark";
   toggleTheme: () => void;
   mounted: boolean;
+  setTheme: React.Dispatch<React.SetStateAction<"light" | "dark">>;
 }
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
@@ -49,6 +50,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     theme,
     toggleTheme,
     mounted,
+    setTheme
   };
 
   return (
