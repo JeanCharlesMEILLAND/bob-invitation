@@ -24,7 +24,7 @@ export interface AdvantagesBloc {
 export default function Advantages({data}: AdvantagesBloc) {
   const {title, qr_code, image, liens, avantages} = data;
 
-  const QRText = " <h2>Scannez</h2>"
+  const QRText = " <p>Scannez</p>"
 
 
   return (

@@ -64,14 +64,14 @@ export default function AvisSection({data}: AvisSection) {
                     spaceBetween: 32,
                   },
                 }}
-                className="avis-swiper avis-swiper-glow"
+                className="avis-swiper avis-swiper-glow "
             >
               {avis && avis.map((av, index) => {
                 if (!av) {
                   return null;
                 }
                 return (
-                    <SwiperSlide key={index} className="py-4 transition-transform duration-300">
+                    <SwiperSlide key={index} className="py-4 transition-transform duration-300 ">
                       {({isActive}) => (
                           <div
                               className={`transition-all duration-300 ${isActive ? 'xl:scale-110' : 'xl:scale-95 xl:opacity-80 contrast-50'

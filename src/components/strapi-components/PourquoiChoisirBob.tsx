@@ -29,7 +29,7 @@ const PourquoiChoisirBob = ({data}: {
                   <div
                       className={`lg:hidden w-4 h-4 min-w-[1rem] min-h-[1rem] ${theme === 'light' ? 'bg-[#242D31]' : 'bg-white'} rounded-full self-start flex-shrink-0`}></div>
                   <div>
-                    <h3 className={`text-lg font-semibold uppercase mb-4 ${theme === 'light' ? 'text-[#242D31]' : 'text-white'}`}>{avantage.titre}</h3>
+                    <h2 className={`text-lg font-semibold uppercase mb-4 ${theme === 'light' ? 'text-[#242D31]' : 'text-white'}`}>{avantage.titre}</h2>
                     <HighlightedText className={`max-w-md ${theme === 'light' ? 'text-[#242D31]' : 'text-white'}`}
                                      text={avantage.description}/>
                   </div>

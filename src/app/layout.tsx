@@ -1,9 +1,9 @@
-import { Inter, Outfit, Prompt } from "next/font/google";
+import {Inter, Outfit, Prompt} from "next/font/google";
 import "./globals.css";
 import "@/assets/css/container.css";
-import { getFooter, getNavbar } from "@/utils/get-global-data";
+import {getFooter, getGlobal, getNavbar} from "@/utils/get-global-data";
 import ClientLayout from "./ClientLayout";
-import { headers } from "next/headers";
+import {Metadata} from 'next';
 
 const inter = Inter({
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
@@ -26,72 +26,45 @@ const prompt = Prompt({
   variable: "--font-prompt",
 });
 
-export async function generateMetadata() {
-  const hdrs = await headers();
-  const host = hdrs.get('host');
-  const protocol = host?.startsWith('localhost') ? 'http' : 'https';
-  const url = `${protocol}://${host}`;
+export async function generateMetadata(): Promise<Metadata> {
+  const globalData = await getGlobal();
+  const {siteName, siteDescription, defaultSeo} = globalData.data;
 
   return {
-    title: "Borrow & Back - Partagez, Empruntez, Réduisez vos Dépenses avec BOB !",
-    description: "Avec BOB (Borrow and Back), gérez vos prêts d'objets et d'argent entre amis en toute simplicité. Ajoutez des contacts, recevez des rappels, partagez facilement, et réduisez vos dépenses !",
-    keywords: [
-      "prêt d'objet",
-      "emprunt entre amis",
-      "gestion de prêts",
-      "partage communautaire",
-      "consommation responsable",
-      "application prêt",
-      "Borrow and Back",
-      "BOB app",
-      "objets à partager",
-      "économie circulaire"
-    ],
-    icons: [
-      {
-        rel: "icon",
-        url: "/svg/bob.svg",
-      },
-    ],
+    title: defaultSeo.metaTitle || siteName,
+    description: defaultSeo.metaDescription || siteDescription,
+    keywords: defaultSeo.keywords || "Bob, Borrow and Back, partage, emprunt, économies, gestion de prêts, rappels, communauté",
     openGraph: {
-      title: "Borrow & Back - Gérer et Partager vos Prêts en Toute Simplicité",
-      description: "Empruntez et prêtez objets ou argent à vos proches avec BOB. Notifications, historique, groupes privés/publics. Simplifiez vos échanges !",
-      url: url,
-      siteName: "Borrow and Back",
-      images: [
-        {
-          url: "/svg/bob.svg", // Remplace par ton image réelle
-          width: 1200,
-          height: 630,
-          alt: "Aperçu de l'application Borrow and Back",
-        },
-      ],
+      title: defaultSeo.metaTitle || siteName,
+      description: defaultSeo.metaDescription || siteDescription,
       type: "website",
+      url: defaultSeo.canonicalUrl || "https://www.bob-app.com",
+      images: defaultSeo.shareImage?.url || "/images/bob-og-image.jpg",
     },
     twitter: {
       card: "summary_large_image",
-      title: "Borrow & Back - L'app de prêt entre amis",
-      description: "Partagez des objets, recevez des rappels automatiques et gagnez des points Bobies. Rejoignez la communauté dès aujourd’hui !",
-      images: ["/svg/bob.svg"], // Remplace par ton image réelle
+      title: defaultSeo.metaTitle || siteName,
+      description: defaultSeo.metaDescription || siteDescription,
+      images: defaultSeo.shareImage?.url || "/images/bob-twitter-image.jpg",
     },
+    icons: [{
+      rel: "icon",
+      type: "image/svg+xml",
+      url: "/svg/bob.svg"
+    }, {
+      rel: "apple-touch-icon",
+      sizes: "180x180",
+      url: "/apple-touch-icon.png"
+    }],
     alternates: {
-      canonical: url,
+      canonical: defaultSeo.canonicalUrl || "https://www.bob-app.com",
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-      },
-    },
-  }
-};
-
+  };
+}
 
 export default async function RootLayout({
-  children,
-}: Readonly<{
+                                           children,
+                                         }: Readonly<{
   children: React.ReactNode;
 }>) {
   const [navbarData, footerData] = await Promise.all([
@@ -101,14 +74,14 @@ export default async function RootLayout({
 
 
   return (
-    <html lang="fr">
+      <html lang="fr">
       <body
-        className={`${inter.variable} ${outfit.variable} ${prompt.variable} antialiased max-w-screen overflow-x-hidden`}
+          className={`${inter.variable} ${outfit.variable} ${prompt.variable} antialiased max-w-screen overflow-x-hidden`}
       >
-        <ClientLayout navbarData={navbarData.data} footerData={footerData.data}>
-          {children}
-        </ClientLayout>
+      <ClientLayout navbarData={navbarData.data} footerData={footerData.data}>
+        {children}
+      </ClientLayout>
       </body>
-    </html>
+      </html>
   );
 }
