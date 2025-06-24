@@ -27,22 +27,15 @@ export default function BlocQr({QRText, QRImage, MockupImage}: BlocQrProps) {
           <HighlightedText text={QRText} className={textMediaQueries + "translate-x-4"} style={qsStyle}/>
 
           <div
-              className={`relative w-full h-24 lg:w-full lg:h-32  bg-white rounded-lg flex-shrink-0 border border-[var(--foreground)]/10 shadow`}
+              className="relative w-24 h-24 lg:w-32 lg:h-32 bg-white rounded-lg flex-shrink-0 border border-[var(--foreground)]/10 shadow"
               aria-label="Scannez le QR code pour télécharger l'application Borrow and Back"
           >
-            {imageUrl ? (
+            {imageUrl && (
                 <Image
                     src={imageUrl || "/images/Advantages/bobQr.png"}
                     alt="QR code Borrow and Back"
                     fill
-                    className="object-fill lg:object-contain rounded-lg"
-                />
-            ) : (
-                <Image
-                    src={"/images/Advantages/bobQr.png"}
-                    alt="QR code Borrow and Back"
-                    fill
-                    className="object-fill lg:object-contain rounded-lg"
+                    className="object-contain rounded-lg"
                 />
             )}
           </div>
