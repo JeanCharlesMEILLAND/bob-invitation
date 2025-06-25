@@ -50,7 +50,6 @@ export default async function PageRoot({ params }: { params: Promise<Params> }) 
 }
 
 
-
 export async function generateMetadata(props: { params: Promise<Params> }) {
     const params = await props.params;
     const { slug } = params;
