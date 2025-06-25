@@ -1,0 +1,17 @@
+.richTextContainer h1,
+.richTextContainer h2,
+.richTextContainer h3,
+.richTextContainer h4,
+.richTextContainer h5 {
+  font-family: 'Prompt';
+}
+
+.richTextContainer p,
+.richTextContainer span,
+.richTextContainer div {
+  font-family: 'Inter';
+}
+
+.richTextContainer ul {
+    list-style: none;
+}

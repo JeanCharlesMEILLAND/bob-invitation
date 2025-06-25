@@ -8,7 +8,7 @@ interface HighlightedTextProps {
 
 export default function HighlightedText({
   text,
-  className,
+  className = "",
   style,
 }: HighlightedTextProps) {
   const result = changeSrcUrl(text);

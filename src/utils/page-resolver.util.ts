@@ -35,7 +35,8 @@ export const getPageBySlug = cache(async (slug: string) => {
           },
           'sections.rejoinez': {
             populate: '*'
-          }
+          },
+          'shared.rich-text' : '*'
         }
       },
       seo: true
