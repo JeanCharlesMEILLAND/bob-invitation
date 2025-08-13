@@ -1,23 +1,11 @@
 import type {NextConfig} from "next";
-import path from 'path';
 
 const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'bob.strapi-pro.com',
-        port: '',
-        pathname: '/**',
-      },
-    ],
-  },
+  /* config options here */
   eslint: {
-    ignoreDuringBuilds: true,
-  },
-  webpack: (config) => {
-    config.resolve.alias['@'] = path.join(__dirname, 'src');
-    return config;
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true
   },
 };
 

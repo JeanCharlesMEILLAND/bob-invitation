@@ -1,62 +1,100 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ededed;
-  --foreground: #262626;
-
-  --primary : #0BCAFF;
+    --bg: #EDF3FF;
+    --fg: #121318;
+    --custom-text-color: #25416E
 }
 
-html.dark {
-  --background: #262626;
-  --foreground: #ededed;
+html, body {
+    scroll-behavior: smooth;
+    background: var(--bg);
+    color: var(--fg);
 }
 
-html.light {
-  --background: #ededed;
-  --foreground: #262626;
+/* === Tokens Tailwind v4 pour tes classes custom === */
+@theme {
+    /* Colors */
+    --color-ink: #0f172a;
+    --color-brand-50: #f3f7ff;
+    --color-brand-100: #e8efff;
+    --color-brand-200: #cfe0ff;
+    --color-brand-300: #a6c2ff;
+    --color-brand-400: #7ba1ff;
+    --color-brand-500: #4b7bff;
+    --color-brand-600: #2f5df3;
+    --color-brand-700: #2549c6;
+    --color-brand-800: #1f3ca0;
+    --color-brand-900: #0F55C5;
+
+    --color-primary: #EDF3FF;
+    --color-accent: #25416E;
+
+    /* Radius */
+    --radius-xl2: 1.25rem; /* => rounded-xl2 */
+    /* Shadows */
+    --shadow-glow: 0 0 0 2px rgba(255, 255, 255, 0.08),
+    0 10px 40px rgba(75, 123, 255, 0.25); /* => shadow-glow */
+}
+.container-gutter {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+.section {
+    @apply py-12 sm:py-16 md:py-20 lg:py-28;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.card {
+    @apply rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.gradient-text {
+    background: linear-gradient(90deg, #0F55C5 0%, #22c55e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
+.bg-grid {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-in;
+*:focus-visible {
+    outline: 2px solid rgba(75, 123, 255, 0.9);
+    outline-offset: 2px;
 }
 
-.animate-pulse {
-  animation: pulse 2s infinite;
+/* --- Floating cards animation --- */
+@keyframes bob-float {
+    0% {
+        transform: translateY(0)
+    }
+    50% {
+        transform: translateY(-6px)
+    }
+    100% {
+        transform: translateY(0)
+    }
 }
 
-.theme {
-  background: var(--background);
-  color: var(--foreground);
+.animate-bob {
+    animation: bob-float 6s ease-in-out infinite
 }
 
+.animate-bob-slow {
+    animation: bob-float 7.5s ease-in-out infinite
+}
+
+.animate-bob-slower {
+    animation: bob-float 9s ease-in-out infinite
+}
+
+/* optionnel : pause du flottement au survol, pour renforcer l'effet hover */
+.animate-bob:hover,
+.animate-bob-slow:hover,
+.animate-bob-slower:hover {
+    animation-play-state: paused
+}

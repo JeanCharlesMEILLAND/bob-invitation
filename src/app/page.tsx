@@ -1,37 +1,17 @@
-import componentResolver from "@/utils/component-resolver.util";
-import ErrorAlert from "@/components/common/alerts/ErrorAlert";
-import {getPageBySlug} from "@/utils/page-resolver.util";
+import Hero from '@/components/sections/Hero'
+import {FeaturesHighlight} from "@/components/sections/FeaturesHighlight";
+import Features from "@/components/sections/Features";
+import Testimonials from "@/components/sections/Testimonials";
+import {CTA} from "@/components/sections/CTA";
 
-export const revalidate = 5;
-
-export default async function RootRoute() {
-  let error = null;
-  try {
-    const page: any = await getPageBySlug("accueil");
-
-    if (page.error && page.error.status == 401)
-      throw new Error(
-          "Missing or invalid credentials. Have you created an access token using the Strapi admin panel? http://localhost:1337/admin/"
-      );
-
-    if (page.data.length === 0) return null;
-
-    const contentSections = page.data[0].contentSections;
-    
-    return (
-        <>
-          {contentSections.map((section: any, index: number) =>
-              componentResolver(section, index)
-          )}
-        </>
-    );
-  } catch (e: any) {
-    error = "Missing or invalid credentials";
-  }
-
-  if (error) {
-    return <ErrorAlert message={error}/>;
-  }
-
-  return null;
+export default function Page() {
+  return (
+      <>
+        <Hero/>
+        <Features/>
+        <FeaturesHighlight/>
+        <Testimonials/>
+        <CTA/>
+      </>
+  )
 }
